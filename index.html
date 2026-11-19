@@ -487,7 +487,44 @@ h1 em,.final h2 em{color:var(--hot2)}
 .geo .pulse{border-color:var(--hot)}
 .in .ln-end .ln-dot,.in .fs:last-child .tn-dot{border-color:var(--hot);background-color:#1c2a06;box-shadow:0 0 0 4px rgba(200,255,61,.14),0 0 22px -4px var(--hot)}
 .line.in .ln-end .ln-n{color:var(--hot2)}
+
+/* horario, instagram, empresas e duvidas */
+.onde-side{display:grid;gap:28px;justify-items:center}
+.plate{width:100%;max-width:520px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--line2);border-radius:18px;background:var(--card)}
+.plate>div{padding:18px 20px}
+.plate>div+div{border-left:1px solid var(--line2)}
+.plate dt{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue2);margin-bottom:10px}
+.plate svg,.ft .ig svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.plate dd{font-size:15px;line-height:1.55;color:var(--soft)}
+.plate dd b{color:var(--ice);font-weight:600}
+.plate dd span{font-size:13px;color:var(--muted)}
+.plate a{color:var(--ice);font-weight:600;text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:4px;display:inline-flex;min-height:28px;align-items:center}
+.plate a:hover{text-decoration-color:var(--blue2)}
+.extra{margin-top:clamp(72px,10vw,140px);display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);align-items:start}
+.extra h3{margin:14px 0 10px}
+.biz{border:1px solid var(--line2);border-radius:24px;padding:clamp(24px,3vw,36px);background:var(--card)}
+.biz>p:not(.kicker){color:var(--muted)}
+.biz ul{margin:22px 0 26px;display:grid;border-top:1px solid var(--line)}
+.biz li{padding:14px 0;border-bottom:1px solid var(--line);display:grid;gap:2px}
+.biz li b{font-family:var(--f-head);font-weight:600;font-size:16px}
+.biz li span{color:var(--muted);font-size:14px}
+.qas{margin-top:18px;border-top:1px solid var(--line2)}
+.qa{border-bottom:1px solid var(--line2)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:60px;padding:14px 0;font-family:var(--f-head);font-weight:600;font-size:clamp(16px,1.3vw,18px);transition:color .2s var(--ease)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary:hover{color:var(--blue2)}
+.qa summary:focus-visible{outline:2px solid var(--blue2);outline-offset:4px;border-radius:4px}
+.qa summary i{position:relative;flex:none;width:28px;height:28px;border:1px solid var(--line2);border-radius:8px}
+.qa summary i::before,.qa summary i::after{content:"";position:absolute;left:8px;right:8px;top:13px;height:1.5px;background:var(--blue2);transition:transform .25s var(--ease)}
+.qa summary i::after{transform:rotate(90deg)}
+.qa[open] summary i::after{transform:rotate(0)}
+.qa p{color:var(--muted);font-size:15.5px;line-height:1.55;padding:0 44px 18px 0;max-width:62ch}
+.ft .ig{display:flex}
+.ft .ig svg{color:var(--blue2)}
+@media (max-width:900px){.extra{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.plate{grid-template-columns:minmax(0,1fr)}.plate>div+div{border-left:0;border-top:1px solid var(--line2)}.qa p{padding-right:0}}
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ComputerStore", "name": "ELTEC", "description": "Conserto de console, PC e notebook em Tangará da Serra MT.", "telephone": "+55 65 99985-7609", "address": {"@type": "PostalAddress", "addressLocality": "Tangará da Serra", "addressRegion": "MT", "addressCountry": "BR"}, "areaServed": "Tangará da Serra", "sameAs": ["https://instagram.com/eltec.nologia"], "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "19:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "07:00", "closes": "12:00"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Como funciona o orçamento?", "acceptedAnswer": {"@type": "Answer", "text": "A gente abre, testa e descobre a causa. Você recebe o valor pelo WhatsApp e só depois decide se faz."}}, {"@type": "Question", "name": "Vocês consertam placa?", "acceptedAnswer": {"@type": "Answer", "text": "Não. A gente não faz reparo eletrônico em placa. Testamos e trocamos a peça com defeito, como fonte, memória, SSD ou teclado."}}, {"@type": "Question", "name": "Meus arquivos ficam salvos na formatação?", "acceptedAnswer": {"@type": "Answer", "text": "Ficam, se você pedir a formatação com backup. A gente salva seus documentos antes e devolve tudo no lugar."}}, {"@type": "Question", "name": "Posso levar minha própria peça?", "acceptedAnswer": {"@type": "Answer", "text": "Pode. Se preferir, a gente encomenda: SSD, memória, fonte, carregador e periféricos."}}, {"@type": "Question", "name": "Precisa marcar antes de levar?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Chama no WhatsApp e combina o horário. Retirada e visita técnica também são agendadas."}}, {"@type": "Question", "name": "Atendem fora de Tangará da Serra?", "acceptedAnswer": {"@type": "Answer", "text": "Presencial, só em Tangará da Serra. Suporte remoto atende qualquer cidade."}}]}]}</script>
 </head>
 <body>
 
@@ -805,12 +842,37 @@ h1 em,.final h2 em{color:var(--hot2)}
             <a class="btn btn-line" data-wa="suporte remoto" href="https://wa.me/5565999857609" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Quero suporte remoto</a>
           </div>
         </div>
+        <div class="onde-side">
         <div class="geo rv" aria-hidden="true">
           <span class="r r1"></span><span class="r r2"></span><span class="r r3"></span>
           <span class="pulse"></span><span class="pin"></span>
           <span class="lab l1">Tangará da Serra</span>
           <span class="lab l2">Mato Grosso</span>
           <span class="lab l3">14°37′ S · 57°29′ W</span>
+        </div>
+        <dl class="plate rv" style="--d:.1s">
+          <div><dt><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Horário</dt><dd>Seg a Sex <b>07h às 19h</b><br>Sábado <b>07h às 12h</b><br><span>Domingo fechado</span></dd></div>
+          <div><dt><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9"/></svg>Instagram</dt><dd><a href="https://instagram.com/eltec.nologia" target="_blank" rel="noopener">@eltec.nologia</a><br><span>serviços da bancada</span></dd></div>
+        </dl>
+        </div>
+      </div>
+
+      <div class="extra">
+        <div class="biz rv">
+          <p class="kicker">Para empresas</p>
+          <h3>Escritório e loja <em>também.</em></h3>
+          <p>As máquinas da sua equipe em dia, sem parar o trabalho.</p>
+          <ul>
+            <li><b>Manutenção preventiva</b><span>Limpeza, formatação e troca de peça.</span></li>
+            <li><b>Upgrade sem perder dados</b><span>SSD e memória com clonagem.</span></li>
+            <li><b>Suporte remoto e rede</b><span>Wi-Fi, impressora e compartilhamento.</span></li>
+          </ul>
+          <a class="btn btn-line" data-wa="atendimento para empresa" href="https://wa.me/5565999857609" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Atendimento para empresa</a>
+        </div>
+        <div class="faq rv" style="--d:.06s" id="duvidas">
+          <p class="kicker">Dúvidas</p>
+          <h3>Antes de <em>chamar.</em></h3>
+          <div class="qas"><details class="qa"><summary>Como funciona o orçamento?<i aria-hidden="true"></i></summary><p>A gente abre, testa e descobre a causa. Você recebe o valor pelo WhatsApp e só depois decide se faz.</p></details><details class="qa"><summary>Vocês consertam placa?<i aria-hidden="true"></i></summary><p>Não. A gente não faz reparo eletrônico em placa. Testamos e trocamos a peça com defeito, como fonte, memória, SSD ou teclado.</p></details><details class="qa"><summary>Meus arquivos ficam salvos na formatação?<i aria-hidden="true"></i></summary><p>Ficam, se você pedir a formatação com backup. A gente salva seus documentos antes e devolve tudo no lugar.</p></details><details class="qa"><summary>Posso levar minha própria peça?<i aria-hidden="true"></i></summary><p>Pode. Se preferir, a gente encomenda: SSD, memória, fonte, carregador e periféricos.</p></details><details class="qa"><summary>Precisa marcar antes de levar?<i aria-hidden="true"></i></summary><p>Sim. Chama no WhatsApp e combina o horário. Retirada e visita técnica também são agendadas.</p></details><details class="qa"><summary>Atendem fora de Tangará da Serra?<i aria-hidden="true"></i></summary><p>Presencial, só em Tangará da Serra. Suporte remoto atende qualquer cidade.</p></details></div>
         </div>
       </div>
 
@@ -843,6 +905,8 @@ h1 em,.final h2 em{color:var(--hot2)}
     </nav>
     <div>
       <a class="wa" data-wa="falar com a ELTEC" href="https://wa.me/5565999857609" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>(65) 99985-7609</a>
+      <a class="wa ig" href="https://instagram.com/eltec.nologia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9"/></svg>@eltec.nologia</a>
+      <small>Seg a Sex 07h às 19h · Sáb 07h às 12h</small>
     </div>
     <p class="copy"><span>© 2026 ELTEC</span><span>Tangará da Serra · MT</span></p>
   </div>
