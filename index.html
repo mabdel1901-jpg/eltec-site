@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ELTEC | Assistência técnica de computadores em Tangará da Serra</title>
-<meta name="description" content="Manutenção preventiva, formatação, upgrade e diagnóstico de computadores em Tangará da Serra MT. Abra o PC na tela e veja o que cada peça precisa.">
+<title>ELTEC | Upgrade de PC, manutenção e conserto de consoles em Tangará da Serra</title>
+<meta name="description" content="Upgrade de PC, manutenção de computador e notebook e conserto de PS4, PS5, Xbox e Nintendo Switch em Tangará da Serra MT. Chame a ELTEC no WhatsApp.">
 <meta name="theme-color" content="#050a17">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='10' y='10' width='44' height='44' rx='9' fill='%23050a17' stroke='%23c9d4e6' stroke-width='4'/%3E%3Cpath d='M24 20h17v6H31v3h9v6h-9v3h10v6H24z' fill='%232f8cff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
 <style>
 :root{
   --bg:#050a17;
@@ -29,15 +30,19 @@
   --f-body:"IBM Plex Sans",system-ui,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,monospace;
   --ease:cubic-bezier(.2,.8,.2,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
   --r:14px;
+  --gut:clamp(16px,6vw,96px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 img,svg,canvas{display:block}
 ::selection{background:var(--blue);color:#fff}
+:focus-visible{outline:2px solid var(--blue2);outline-offset:3px;border-radius:8px}
+section[id]{scroll-margin-top:70px}
 
 /* ---------- fundo de circuito ---------- */
 #bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
@@ -54,193 +59,199 @@ main,header,footer{position:relative;z-index:2}
 @keyframes blink{50%{opacity:0}}
 
 /* ---------- nav ---------- */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,48px);transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
-.nav.solid{background:rgba(5,10,23,.92);border-color:var(--line)}
-.brand{display:flex;align-items:center;gap:10px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px clamp(16px,4vw,48px)}
+.nav::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(5,10,23,.94);border-bottom:1px solid var(--line);opacity:0;transition:opacity .4s var(--ease)}
+.nav.solid::before{opacity:1}
+.brand{display:flex;align-items:center;gap:10px;min-height:44px}
 .brand svg{width:38px;height:38px}
 .brand .wm{font-family:var(--f-head);font-style:italic;font-weight:700;font-size:22px;letter-spacing:.04em;background:linear-gradient(180deg,#fff 0%,#c9d4e6 55%,#8a98b3 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.nav ul{display:flex;gap:26px;list-style:none;font-family:var(--f-mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.nav ul a{transition:color .2s}
+.nav ul{display:flex;gap:6px;list-style:none;font-family:var(--f-mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.nav ul a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;transition:color .2s}
 .nav ul a:hover{color:var(--ice)}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font-family:var(--f-head);font-weight:600;font-size:15px;letter-spacing:.02em;transition:transform .25s var(--ease),box-shadow .25s,background .25s}
-.btn svg{width:18px;height:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:13px 22px;border-radius:999px;font-family:var(--f-head);font-weight:600;font-size:15px;letter-spacing:.02em;transition:transform .3s var(--ease-out)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn:active{transform:scale(.97)}
 .btn-wa{background:var(--blue);color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset,0 10px 30px -8px rgba(47,140,255,.7)}
-.btn-wa:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,255,255,.2) inset,0 16px 40px -8px rgba(47,140,255,.9)}
+.btn-wa:hover{transform:translateY(-2px)}
 .btn-ghost{border:1px solid var(--line2);color:var(--ice)}
-.btn-ghost:hover{border-color:var(--blue2);background:rgba(47,140,255,.08)}
-.nav .btn{padding:10px 18px;font-size:14px}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--blue2)}
+.nav .btn{min-height:44px;padding:10px 18px;font-size:14px}
 
-/* ---------- laboratório (hero + PC 3D) ---------- */
-#lab{position:relative;height:560vh}
-.lab-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-#gl{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
-.lab-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(40% 50% at var(--gx,68%) 52%,rgba(47,140,255,.16),transparent 70%);transition:--gx 1s}
-.hero-copy{position:absolute;left:clamp(16px,6vw,96px);top:50%;transform:translateY(calc(-50% + var(--hy,0px)));max-width:min(560px,44vw);will-change:opacity,transform}
-.lab.past-hero .hero-copy{pointer-events:none}
-.lab.hero-gone .hero-copy{visibility:hidden}
+/* ---------- títulos ---------- */
 .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue2);display:flex;align-items:center;gap:10px}
 .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pulse 2s infinite}
 @keyframes pulse{50%{opacity:.35}}
 h1,h2,h3{font-family:var(--f-head);font-weight:700;line-height:1.02;letter-spacing:-.01em}
-h1{font-size:clamp(44px,6.2vw,88px);margin:18px 0 20px;text-transform:uppercase}
-h1 em{font-style:normal;color:transparent;background:linear-gradient(90deg,var(--blue) 0%,var(--blue2) 60%,var(--ice) 100%);-webkit-background-clip:text;background-clip:text}
-.lead{color:#b9c7e3;font-size:clamp(16px,1.25vw,18.5px);max-width:470px}
+h1{font-size:clamp(46px,6.4vw,96px);margin:18px 0 22px;text-transform:uppercase;line-height:.98}
+h1 em,.grad{font-style:normal;color:transparent;background:linear-gradient(90deg,var(--blue) 0%,var(--blue2) 60%,var(--ice) 100%);-webkit-background-clip:text;background-clip:text}
+.lead{color:#b9c7e3;font-size:clamp(16px,1.25vw,18.5px);max-width:500px}
+
+/* ---------- hero ---------- */
+.hero{min-height:100vh;min-height:100svh;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,5vw,80px);align-items:center;padding:96px var(--gut) 64px;max-width:1440px;margin:0 auto;position:relative}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+.hero h1 .ln>span{display:block}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.proof{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:34px;font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+.proof{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:30px;font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
 .proof span{display:flex;align-items:center;gap:7px}
 .proof svg{width:14px;height:14px;color:var(--blue2)}
-
-.hud{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);transition:opacity .4s;pointer-events:none;white-space:nowrap}
-.hud .bar{width:180px;height:2px;background:var(--line2);border-radius:2px;overflow:hidden}
-.hud .bar b{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--blue),var(--ice));box-shadow:0 0 12px var(--blue)}
-.hud .mouse{width:20px;height:32px;border:1.5px solid var(--line2);border-radius:12px;position:relative}
-.hud .mouse::after{content:"";position:absolute;left:50%;top:6px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--blue2);animation:wheel 1.6s var(--ease) infinite}
+.fronts{display:grid;gap:12px;position:relative}
+.fronts::before{content:"";position:absolute;left:31px;top:20px;bottom:20px;width:1px;background:linear-gradient(180deg,transparent,var(--line2),transparent)}
+.ft{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:18px 20px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(14,28,60,.82),rgba(6,12,28,.82));transition:transform .4s var(--ease-out),border-color .3s}
+.ft:hover{transform:translateX(-6px);border-color:var(--line2)}
+.ft .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;border:1px solid var(--line2);background:var(--bg2);color:var(--blue2)}
+.ft .ic svg{width:24px;height:24px}
+.ft b{display:block;font-family:var(--f-head);font-size:19px;text-transform:uppercase;line-height:1.15}
+.ft small{display:block;color:var(--muted);font-size:13.5px;line-height:1.4;margin-top:3px}
+.ft>svg{width:18px;height:18px;color:var(--blue2);transition:transform .35s var(--ease-out)}
+.ft:hover>svg{transform:translateX(4px)}
+.ft .led{position:absolute;right:14px;top:12px;width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:pulse 2.2s infinite;animation-delay:var(--ld,0s)}
+.cue{position:absolute;left:50%;bottom:22px;margin-left:-10px;width:20px;height:32px;border:1.5px solid var(--line2);border-radius:12px}
+.cue::after{content:"";position:absolute;left:50%;top:6px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--blue2);animation:wheel 1.6s var(--ease) infinite}
 @keyframes wheel{0%{transform:translateY(0);opacity:1}100%{transform:translateY(10px);opacity:0}}
-.lab.touring .hud{opacity:0}
 
-.tags{position:absolute;inset:0;pointer-events:none}
-.tag{position:absolute;left:0;top:0;pointer-events:auto;display:flex;align-items:center;gap:0;padding:4px;border-radius:999px;background:rgba(5,10,23,.9);border:1px solid var(--line2);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;color:var(--silver);opacity:0;transition:opacity .35s,border-color .25s,background .25s,color .25s;white-space:nowrap;will-change:transform}
-.tag span{max-width:0;overflow:hidden;transition:max-width .35s var(--ease)}
-.tag:hover span,.tag.on span{max-width:220px;padding:0 8px}
-.tag b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(47,140,255,.18);color:var(--blue2);font-weight:500;font-size:10.5px}
-.lab.is-open .tag{opacity:1}
-.tag:hover,.tag.on{border-color:var(--blue);color:#fff;background:rgba(20,50,110,.85)}
-.tag.on b{background:var(--blue);color:#fff;box-shadow:0 0 14px var(--blue)}
-.tag::before{content:"";position:absolute;left:16px;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%}
-
-.panel{position:absolute;right:clamp(16px,4vw,56px);top:50%;width:min(410px,34vw);transform:translate(30px,-50%);opacity:0;pointer-events:none;transition:opacity .45s var(--ease),transform .6s var(--ease);background:rgba(9,17,38,.94);border:1px solid var(--line2);border-radius:18px;padding:26px 26px 22px;box-shadow:0 30px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.03) inset;max-height:calc(100svh - 150px);overflow:auto;scrollbar-width:thin}
-.lab.touring .panel{opacity:1;transform:translate(0,-50%);pointer-events:auto}
-.panel::before{content:"";position:absolute;left:26px;right:26px;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent)}
-.p-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
-.p-top .num{color:var(--blue2)}
-.p-body{transition:opacity .25s,transform .35s var(--ease)}
-.p-body.swap{opacity:0;transform:translateY(8px)}
-.panel h3{font-size:clamp(24px,2.2vw,30px);margin:12px 0 10px;text-transform:uppercase}
-.panel .fn{color:#c3d0ea;font-size:15px}
-.p-sec{margin-top:18px}
-.p-lbl{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.p-lbl::after{content:"";flex:1;height:1px;background:var(--line)}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-size:12.5px;padding:5px 10px;border-radius:8px;background:rgba(255,181,71,.08);border:1px solid rgba(255,181,71,.25);color:#ffd7a0}
-.p-care{font-size:14.5px;color:#c3d0ea}
-.period{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.period strong{font-family:var(--f-head);font-size:19px;color:#fff}
-.period small{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);letter-spacing:.08em}
-.meter{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;margin-top:10px}
-.meter i{height:16px;border-radius:2px;background:rgba(120,170,255,.1);transition:background .3s,box-shadow .3s}
-.meter i.on{background:var(--blue);box-shadow:0 0 10px rgba(47,140,255,.8)}
-.meter-axis{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10px;color:var(--muted);margin-top:5px}
-.p-note{font-size:12.5px;color:var(--muted);margin-top:8px}
-.p-cta{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.p-cta a{font-family:var(--f-head);font-weight:600;font-size:14px;color:var(--blue2);display:inline-flex;align-items:center;gap:8px}
-.p-cta a:hover{color:#fff}
-.p-nav{display:flex;gap:6px}
-.p-nav button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;transition:border-color .2s,background .2s}
-.p-nav button:hover{border-color:var(--blue);background:rgba(47,140,255,.12)}
-.p-nav svg{width:14px;height:14px}
-
-.rail{position:absolute;left:clamp(16px,4vw,56px);bottom:26px;display:flex;gap:6px;opacity:0;transition:opacity .4s;pointer-events:none}
-.lab.touring .rail{opacity:1;pointer-events:auto}
-.rail button{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);font-family:var(--f-mono);font-size:11px;color:var(--muted);transition:all .2s;background:rgba(5,10,23,.5)}
-.rail button:hover{color:#fff;border-color:var(--line2)}
-.rail button.on{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 16px rgba(47,140,255,.6)}
-.skip{position:absolute;right:clamp(16px,4vw,56px);bottom:30px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:0;pointer-events:none;transition:opacity .4s,color .2s}
-.lab.touring .skip{opacity:1;pointer-events:auto}
-.skip:hover{color:var(--ice)}
-.lab-intro{position:absolute;left:clamp(16px,6vw,96px);top:50%;max-width:min(400px,34vw);opacity:0;transform:translateY(calc(-50% + var(--iy,0px)));pointer-events:none;will-change:opacity,transform}
-.lab-intro h2{font-size:clamp(28px,3vw,42px);text-transform:uppercase}
-.lab-intro p{color:var(--muted);margin-top:10px;font-size:15px}
-.no-gl .lab-fallback{display:flex}
-.lab-fallback{display:none;position:absolute;right:6vw;top:50%;transform:translateY(-50%);width:min(38vw,420px);aspect-ratio:1;align-items:center;justify-content:center}
-.no-gl .lab.touring .lab-fallback{opacity:.15}
+/* entrada do hero (só com JS) */
+.js .hi{opacity:0;transform:translateY(22px)}
+.js .hero h1 .ln>span{transform:translateY(105%)}
+.js .ft{opacity:0;transform:translateX(30px)}
+.go .hi{opacity:1;transform:none;transition:opacity .9s var(--ease-out),transform 1s var(--ease-out);transition-delay:var(--d,0s)}
+.go .hero h1 .ln>span{transform:none;transition:transform 1.1s var(--ease-out);transition-delay:var(--d,0s)}
+.go .ft{opacity:1;transform:none;transition:opacity .9s var(--ease-out),transform 1s var(--ease-out),border-color .3s;transition-delay:var(--d,0s)}
+.go .ft:hover{transform:translateX(-6px);transition-delay:0s}
 
 /* ---------- seções ---------- */
-section.s{padding:clamp(90px,12vw,160px) clamp(16px,6vw,96px);position:relative}
+section.s{padding:clamp(80px,11vw,150px) var(--gut);position:relative}
 .wrap{max-width:1240px;margin:0 auto}
-.s-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:56px}
+.s-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:52px}
 .s-head h2{font-size:clamp(36px,4.6vw,64px);text-transform:uppercase}
 .s-head h2 em{font-style:normal;color:var(--blue2)}
 .s-head p{color:#aebddb;font-size:17px;max-width:480px;justify-self:end}
 .kicker{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue2);margin-bottom:16px;display:flex;align-items:center;gap:10px}
 .kicker::before{content:"";width:22px;height:1px;background:var(--blue2)}
 
-.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out),transform 1s var(--ease-out);transition-delay:var(--d,0s)}
 .rv.in{opacity:1;transform:none}
 
-/* sintomas */
-.sym{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:22px}
-.sym-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.sym-btn{text-align:left;padding:18px;border-radius:var(--r);border:1px solid var(--line);background:rgba(10,20,44,.5);transition:border-color .25s,background .25s,transform .25s var(--ease);display:flex;flex-direction:column;gap:12px;min-height:118px}
-.sym-btn svg{width:26px;height:26px;color:var(--blue2)}
-.sym-btn span{font-family:var(--f-head);font-weight:600;font-size:17px;line-height:1.2}
-.sym-btn:hover{border-color:var(--line2);transform:translateY(-2px)}
-.sym-btn.on{border-color:var(--blue);background:linear-gradient(160deg,rgba(47,140,255,.2),rgba(10,20,44,.6));box-shadow:0 0 0 1px rgba(47,140,255,.3) inset}
-.diag{border-radius:20px;border:1px solid var(--line2);background:var(--panel);padding:30px;position:relative;overflow:hidden;display:flex;flex-direction:column}
-.diag::after{content:"";position:absolute;left:0;right:0;top:-40%;height:40%;background:linear-gradient(180deg,transparent,rgba(47,140,255,.12),transparent);animation:scan 3.5s linear infinite;pointer-events:none}
-@keyframes scan{to{top:120%}}
-.diag-top{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
-.diag-top .live{color:var(--ok);display:flex;gap:8px;align-items:center}
-.diag-top .live i{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse 1.4s infinite}
-.diag h3{font-size:clamp(26px,2.6vw,36px);margin:18px 0 6px;text-transform:uppercase}
-.diag .term{font-family:var(--f-mono);font-size:13px;color:var(--blue2);margin:14px 0 18px;min-height:3.6em;white-space:pre-wrap}
-.diag dl{display:grid;gap:16px}
-.diag dt{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
-.diag dd{color:#c9d6ef;font-size:15.5px}
-.diag-act{margin-top:auto;padding-top:24px;display:flex;flex-wrap:wrap;gap:10px}
-.diag-act .btn{padding:11px 18px;font-size:14px}
-
-/* plano */
-.plan{border-radius:22px;border:1px solid var(--line);background:rgba(8,16,38,.6);padding:clamp(18px,3vw,34px);overflow:hidden}
-.plan-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;margin-bottom:26px}
-.seg{display:inline-flex;padding:4px;border-radius:999px;border:1px solid var(--line2);background:rgba(5,10,23,.6);position:relative}
-.seg button{position:relative;z-index:1;padding:9px 18px;border-radius:999px;font-family:var(--f-head);font-weight:600;font-size:14px;color:var(--muted);transition:color .25s}
-.seg button.on{color:#fff}
-.seg .pill{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:var(--blue);box-shadow:0 0 20px rgba(47,140,255,.5);transition:left .45s var(--ease),width .45s var(--ease)}
-.plan-sum{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);letter-spacing:.04em}
-.plan-sum b{color:#fff;font-family:var(--f-head);font-size:22px;font-weight:700;margin-right:4px}
-.grid-plan{display:grid;grid-template-columns:200px repeat(24,minmax(0,1fr));align-items:center;row-gap:6px}
-.gp-h{font-family:var(--f-mono);font-size:10px;color:var(--muted);text-align:center;padding-bottom:8px}
-.gp-name{font-family:var(--f-head);font-weight:600;font-size:14.5px;padding-right:14px;line-height:1.2}
-.gp-name small{display:block;font-family:var(--f-mono);font-weight:400;font-size:10.5px;color:var(--muted);margin-top:2px}
-.gp-cell{height:34px;position:relative;border-left:1px dashed rgba(120,170,255,.07)}
-.gp-cell .dot{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px;border-radius:4px;background:var(--blue);box-shadow:0 0 14px rgba(47,140,255,.7);transform:scale(0) rotate(45deg);transition:transform .45s var(--ease);transition-delay:var(--d,0s)}
-.gp-cell .dot.on{transform:scale(1) rotate(45deg)}
-.gp-cell .run{position:absolute;left:0;right:0;top:50%;height:3px;margin-top:-1.5px;background:rgba(61,220,151,.55);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease);transition-delay:var(--d,0s)}
-.gp-cell .run.on{transform:scaleX(1)}
-.plan-note{margin-top:22px;font-size:13.5px;color:var(--muted);display:flex;gap:10px;align-items:flex-start}
-.plan-note svg{flex:none;width:16px;height:16px;margin-top:3px;color:var(--warn)}
-.plan-scroll{overflow-x:auto;scrollbar-width:thin;padding-bottom:6px}
-.plan-scroll .grid-plan{min-width:760px}
-
-/* serviços */
-.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
-.card{grid-column:span 2;border-radius:20px;border:1px solid var(--line);background:linear-gradient(170deg,rgba(14,28,60,.7),rgba(6,12,28,.7));padding:28px;position:relative;overflow:hidden;transition:border-color .3s,transform .4s var(--ease)}
-.card:hover{border-color:var(--line2);transform:translateY(-3px)}
-.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--cx,50%) var(--cy,0%),rgba(47,140,255,.14),transparent 60%);opacity:0;transition:opacity .3s}
+/* cards */
+.card{border-radius:20px;border:1px solid var(--line);background:linear-gradient(170deg,rgba(14,28,60,.7),rgba(6,12,28,.7));padding:28px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(400px circle at var(--cx,50%) var(--cy,0%),rgba(47,140,255,.14),transparent 60%);opacity:0;transition:opacity .3s}
 .card:hover::before{opacity:1}
-.card.wide{grid-column:span 3}
 .card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;border:1px solid var(--line2);background:rgba(47,140,255,.08);color:var(--blue2);margin-bottom:22px}
 .card .ic svg{width:24px;height:24px}
 .card h3{font-size:22px;text-transform:uppercase;margin-bottom:10px}
 .card p{color:#aebddb;font-size:15px}
-.card ul{list-style:none;margin-top:16px;display:grid;gap:7px;font-size:14px;color:#c9d6ef}
-.card li{display:flex;gap:9px;align-items:center}
-.card li::before{content:"";width:5px;height:5px;background:var(--blue);transform:rotate(45deg);flex:none}
 .card .cn{position:absolute;right:22px;top:22px;font-family:var(--f-mono);font-size:11px;color:rgba(139,155,187,.6)}
+
+/* frentes */
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.fr{display:flex;flex-direction:column;padding:30px 28px 26px;transition:transform .5s var(--ease-out),opacity .9s var(--ease-out),border-color .3s}
+.fr.in:hover{transform:translateY(-4px);border-color:var(--line2)}
+.fr .sub{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue2);margin-bottom:8px}
+.fr h3{font-size:clamp(24px,2.2vw,30px)}
+.fr ul{list-style:none;margin:20px 0 24px;display:grid;gap:12px;font-size:15px;color:#c9d6ef}
+.fr li{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;line-height:1.45}
+.fr li::before{content:"";width:6px;height:6px;margin-top:8px;background:var(--blue);transform:rotate(45deg)}
+.fr li small{display:block;color:var(--muted);font-size:13.5px;margin-top:2px}
+.fr .btn{margin-top:auto;align-self:flex-start}
+.models{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.models span{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;padding:5px 10px;border-radius:8px;border:1px solid var(--line2);color:var(--ice);background:rgba(47,140,255,.08)}
+
+/* diagnóstico interativo */
+.dx{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);grid-template-areas:"seg stage" "syms stage" "syms out";grid-template-rows:auto auto 1fr;gap:16px 24px;align-items:start}
+.dx .seg{grid-area:seg;justify-self:start}
+.dx-syms{grid-area:syms;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dx-stage{grid-area:stage;align-self:stretch}
+.dx-out{grid-area:out;align-self:stretch}
+.seg{display:inline-grid;grid-auto-flow:column;grid-auto-columns:1fr;padding:4px;border-radius:999px;border:1px solid var(--line2);background:rgba(5,10,23,.7);position:relative}
+.seg button{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 18px;border-radius:999px;font-family:var(--f-head);font-weight:600;font-size:14.5px;color:var(--muted);transition:color .3s;white-space:nowrap}
+.seg button svg{width:18px;height:18px}
+.seg button.on{color:#fff}
+.seg .pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/var(--n,3));border-radius:999px;background:var(--blue);box-shadow:0 0 20px rgba(47,140,255,.5);transform:translateX(calc(100% * var(--i,0)));transition:transform .5s var(--ease-out)}
+.sym-btn{text-align:left;padding:16px;border-radius:var(--r);border:1px solid var(--line);background:rgba(10,20,44,.6);transition:transform .35s var(--ease-out),border-color .25s;display:flex;align-items:center;gap:12px;min-height:76px;position:relative;overflow:hidden}
+.sym-btn::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(47,140,255,.24),rgba(10,20,44,0));opacity:0;transition:opacity .35s}
+.sym-btn>*{position:relative}
+.sym-btn svg{width:24px;height:24px;color:var(--blue2);flex:none}
+.sym-btn span{font-family:var(--f-head);font-weight:600;font-size:16.5px;line-height:1.2}
+.sym-btn:hover{border-color:var(--line2);transform:translateY(-2px)}
+.sym-btn:active{transform:scale(.98)}
+.sym-btn.on{border-color:var(--blue)}
+.sym-btn.on::before{opacity:1}
+.sym-btn.pop{animation:popIn .5s var(--ease-out) both;animation-delay:var(--d,0s)}
+@keyframes popIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.dx-panel{border:1px solid var(--line2);background:rgba(9,17,38,.86);position:relative;overflow:hidden}
+.dx-stage{border-radius:20px 20px 0 0;border-bottom:0;margin-bottom:-16px;padding:18px 22px 6px}
+.dx-out{border-radius:0 0 20px 20px;border-top:1px dashed var(--line);padding:22px 26px 26px;display:flex;flex-direction:column}
+.dx-stage::after{content:"";position:absolute;left:0;right:0;top:0;height:45%;background:linear-gradient(180deg,transparent,rgba(47,140,255,.1),transparent);transform:translateY(-100%);animation:scan 4s linear infinite;pointer-events:none}
+@keyframes scan{to{transform:translateY(240%)}}
+.dx-top{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+.dx-top .live{color:var(--ok);display:flex;gap:8px;align-items:center}
+.dx-top .live i{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse 1.4s infinite}
+.dev{width:100%;height:auto;max-height:250px;margin:6px auto 0;overflow:visible}
+.dev .g{opacity:0;transform:translateY(10px);transition:opacity .45s var(--ease-out),transform .6s var(--ease-out)}
+.dev .g.on{opacity:1;transform:none}
+.dev .base *{fill:none;stroke:rgba(150,190,255,.38);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+.dev .base .fillp{fill:rgba(47,140,255,.05)}
+.dev .hl *{fill:rgba(47,140,255,.14);stroke:var(--blue2);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.dev .hl [data-k]{opacity:0;transition:opacity .45s var(--ease-out)}
+.dev .hl [data-k].on{opacity:1}
+.dev .hot{transition:transform .7s var(--ease-out)}
+.dev .hot circle{fill:var(--blue);stroke:none}
+.dev .hot .ring{fill:none;stroke:var(--blue2);stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:ring 1.8s var(--ease-out) infinite}
+.dev .hot .ring2{animation-delay:.9s}
+@keyframes ring{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+.dx-out h3{font-size:clamp(24px,2.4vw,32px);text-transform:uppercase}
+.dx-out .term{font-family:var(--f-mono);font-size:13px;color:var(--blue2);margin:10px 0 18px;min-height:3.4em;white-space:pre-wrap}
+.dx-body{transition:opacity .25s,transform .4s var(--ease-out)}
+.dx-body.swap{opacity:0;transform:translateY(8px)}
+.dx-out dl{display:grid;gap:14px}
+.dx-out dt{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.dx-out dd{color:#c9d6ef;font-size:15.5px}
+.period{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.period strong{font-family:var(--f-head);font-size:18px;color:#fff;font-weight:600}
+.period small{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);letter-spacing:.08em}
+.meter{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;margin-top:8px}
+.meter i{height:14px;border-radius:2px;background:rgba(120,170,255,.1);position:relative;overflow:hidden}
+.meter i::after{content:"";position:absolute;inset:0;background:var(--blue);opacity:0;transform:scaleY(.3);transition:opacity .35s,transform .45s var(--ease-out);transition-delay:var(--d,0s)}
+.meter i.on::after{opacity:1;transform:none}
+.meter-axis{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10px;color:var(--muted);margin-top:5px}
+.dx-note{font-size:13px;color:var(--muted);margin-top:8px}
+.dx-act{margin-top:22px}
+
+/* plano */
+.plan{border-radius:22px;border:1px solid var(--line);background:rgba(8,16,38,.72);padding:clamp(18px,3vw,34px);overflow:hidden}
+.plan-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;margin-bottom:26px}
+.plan-sum{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+.plan-sum b{color:#fff;font-family:var(--f-head);font-size:22px;font-weight:700;margin-right:4px}
+.grid-plan{display:grid;grid-template-columns:210px repeat(24,minmax(0,1fr));align-items:center;row-gap:6px}
+.gp-h{font-family:var(--f-mono);font-size:10px;color:var(--muted);text-align:center;padding-bottom:8px}
+.gp-name{font-family:var(--f-head);font-weight:600;font-size:14.5px;padding-right:14px;line-height:1.2}
+.gp-name small{display:block;font-family:var(--f-mono);font-weight:400;font-size:10.5px;color:var(--muted);margin-top:2px}
+.gp-cell{height:34px;position:relative;border-left:1px dashed rgba(120,170,255,.07)}
+.gp-cell .dot{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px;border-radius:4px;background:var(--blue);box-shadow:0 0 14px rgba(47,140,255,.7);transform:scale(0) rotate(45deg);transition:transform .45s var(--ease-out);transition-delay:var(--d,0s)}
+.gp-cell .dot.on{transform:scale(1) rotate(45deg)}
+.gp-cell .run{position:absolute;left:0;right:0;top:50%;height:3px;margin-top:-1.5px;background:rgba(61,220,151,.55);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease-out);transition-delay:var(--d,0s)}
+.gp-cell .run.on{transform:scaleX(1)}
+.gp-name{transition:opacity .4s var(--ease-out),transform .5s var(--ease-out)}
+.grid-plan.swap .gp-name{opacity:0;transform:translateX(-8px)}
+.plan-note{margin-top:22px;font-size:13.5px;color:var(--muted);display:flex;gap:10px;align-items:flex-start}
+.plan-note svg{flex:none;width:16px;height:16px;margin-top:3px;color:var(--warn)}
+.plan-scroll{overflow-x:auto;scrollbar-width:thin;padding-bottom:6px}
+.plan-scroll .grid-plan{min-width:760px}
+.swipe{display:none;font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.08em;margin-bottom:10px}
 
 /* processo */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative}
-.steps-line{position:absolute;left:0;right:0;top:27px;height:2px;pointer-events:none}
-.steps-line path{stroke:var(--blue);stroke-width:2;fill:none;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2s var(--ease) .2s;filter:drop-shadow(0 0 6px rgba(47,140,255,.8))}
-.steps.in .steps-line path{stroke-dashoffset:0}
+.steps-line{position:absolute;left:3%;right:3%;top:27px;height:2px;background:var(--blue);box-shadow:0 0 10px rgba(47,140,255,.8);transform:scaleX(0);transform-origin:left;transition:transform 1.8s var(--ease-out) .2s;pointer-events:none}
+.steps.in .steps-line{transform:none}
 .step{position:relative;z-index:1}
 .step .n{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--bg2);border:1px solid var(--line2);font-family:var(--f-mono);color:var(--blue2);font-size:15px;margin-bottom:22px;box-shadow:0 0 0 6px var(--bg)}
 .step h3{font-size:21px;text-transform:uppercase;margin-bottom:8px}
 .step p{color:#aebddb;font-size:15px}
+.steps .step{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease-out),transform .9s var(--ease-out);transition-delay:calc(var(--k)*.18s + .2s)}
+.steps.in .step{opacity:1;transform:none}
 
 /* padrão */
 .spec{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;align-items:stretch}
-.sheet{border-radius:20px;border:1px solid var(--line2);background:rgba(6,12,28,.75);font-family:var(--f-mono);font-size:13.5px;overflow:hidden}
+.sheet{border-radius:20px;border:1px solid var(--line2);background:rgba(6,12,28,.8);font-family:var(--f-mono);font-size:13.5px;overflow:hidden}
 .sheet-h{display:flex;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line);color:var(--muted);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
 .sheet-h span:first-child{color:var(--blue2)}
 .row{display:grid;grid-template-columns:auto 1fr auto;gap:14px;padding:16px 20px;border-bottom:1px solid rgba(120,170,255,.07);align-items:center}
@@ -248,29 +259,32 @@ section.s{padding:clamp(90px,12vw,160px) clamp(16px,6vw,96px);position:relative}
 .row .k{color:var(--muted);font-size:11px;width:28px}
 .row .v{color:var(--text);font-family:var(--f-body);font-size:15.5px}
 .row .v small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
-.row .st{color:var(--ok);font-size:11.5px;letter-spacing:.1em;display:flex;align-items:center;gap:6px}
+.row .st{color:var(--ok);font-size:11.5px;letter-spacing:.1em;display:flex;align-items:center;gap:6px;opacity:0;transform:translateX(-6px);transition:opacity .5s var(--ease-out),transform .6s var(--ease-out);transition-delay:calc(var(--k)*.15s + .4s)}
+.sheet.in .row .st{opacity:1;transform:none}
 .row .st::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
 .who{display:grid;gap:14px}
-.who .card{grid-column:auto}
 
 /* faq */
 .faq{display:grid;grid-template-columns:1fr 1.4fr;gap:40px}
 .faq h2{font-size:clamp(36px,4.4vw,60px);text-transform:uppercase}
 .faq-list{border-top:1px solid var(--line)}
 details{border-bottom:1px solid var(--line)}
-summary{list-style:none;cursor:pointer;padding:22px 0;display:flex;justify-content:space-between;gap:20px;align-items:center;font-family:var(--f-head);font-weight:600;font-size:19px}
+summary{list-style:none;cursor:pointer;min-height:44px;padding:20px 0;display:flex;justify-content:space-between;gap:20px;align-items:center;font-family:var(--f-head);font-weight:600;font-size:19px;line-height:1.3}
 summary::-webkit-details-marker{display:none}
-summary i{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid var(--line2);position:relative;transition:transform .35s var(--ease),border-color .2s}
+summary i{flex:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--line2);position:relative;transition:transform .4s var(--ease-out)}
 summary i::before,summary i::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.5px;margin:-.75px -5px;background:var(--blue2)}
-summary i::after{transform:rotate(90deg);transition:transform .35s var(--ease)}
-details[open] summary i{border-color:var(--blue)}
+summary i::after{transform:rotate(90deg);transition:transform .4s var(--ease-out)}
+details[open] summary i{transform:rotate(180deg)}
 details[open] summary i::after{transform:rotate(0)}
 details p{color:#aebddb;padding:0 40px 22px 0;font-size:15.5px}
+details[open] p{animation:popIn .45s var(--ease-out)}
 
 /* cta final */
-.final{text-align:center;padding:clamp(110px,14vw,190px) clamp(16px,6vw,96px)}
+.final{text-align:center;padding:clamp(100px,13vw,180px) var(--gut)}
 .final .chipbig{width:120px;height:120px;margin:0 auto 34px}
-.final h2{font-size:clamp(42px,7vw,104px);text-transform:uppercase;line-height:.95}
+.final .chipbig.in{animation:float 5s var(--ease) infinite 1s}
+@keyframes float{50%{transform:translateY(-10px)}}
+.final h2{font-size:clamp(40px,7vw,104px);text-transform:uppercase;line-height:.95}
 .final h2 em{font-style:normal;color:transparent;background:linear-gradient(90deg,var(--blue),var(--ice));-webkit-background-clip:text;background-clip:text}
 .final p{color:#aebddb;font-size:18px;max-width:520px;margin:22px auto 34px}
 .final .btn{padding:17px 30px;font-size:17px}
@@ -278,67 +292,86 @@ details p{color:#aebddb;padding:0 40px 22px 0;font-size:15.5px}
 .final .meta span{display:flex;gap:8px;align-items:center}
 .final .meta svg{width:15px;height:15px;color:var(--blue2)}
 
-footer{border-top:1px solid var(--line);padding:34px clamp(16px,6vw,96px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;font-size:13.5px;color:var(--muted)}
+footer{border-top:1px solid var(--line);background:rgba(5,10,23,.6);padding:30px var(--gut) 90px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;font-size:13.5px;color:var(--muted)}
 footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
 
-.fab{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;box-shadow:0 12px 30px -6px rgba(47,140,255,.8);transform:scale(0);transition:transform .45s var(--ease)}
+.fab{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;box-shadow:0 12px 30px -6px rgba(47,140,255,.8);transform:scale(0);transition:transform .5s var(--ease-out)}
 .fab.show{transform:scale(1)}
-.lab-on .fab{transform:scale(0)}
 .fab svg{width:28px;height:28px}
-.fab::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--blue);opacity:0;animation:ring 2.6s var(--ease) infinite}
-@keyframes ring{0%{transform:scale(.85);opacity:.7}100%{transform:scale(1.35);opacity:0}}
+.fab::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--blue);opacity:0;animation:ring 2.6s var(--ease-out) infinite}
 
 /* ---------- responsivo ---------- */
-@media (max-width:980px){
+@media (max-width:1100px){
   .nav ul{display:none}
+}
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr;align-content:center;gap:28px}
+  .fronts{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .fronts::before{display:none}
+  .ft{grid-template-columns:1fr;justify-items:start;gap:10px;padding:14px}
+  .ft>svg,.ft small{display:none}
+  .ft b{font-size:15px}
+  .ft .ic{width:38px;height:38px;border-radius:10px}
+  .ft .ic svg{width:20px;height:20px}
+  .go .ft:hover,.ft:hover{transform:none}
+  .js .ft{transform:translateY(16px)}
+  .cue{display:none}
   .s-head{grid-template-columns:1fr;gap:16px}
   .s-head p{justify-self:start}
-  .sym{grid-template-columns:1fr}
-  .bento{grid-template-columns:1fr 1fr}
-  .card,.card.wide{grid-column:span 1}
+  .trio{grid-template-columns:1fr}
+  .dx{grid-template-columns:1fr;grid-template-areas:"seg" "stage" "syms" "out";grid-template-rows:none}
+  .dx .seg{justify-self:stretch}
+  .dx-stage{border-bottom:1px solid var(--line2);border-radius:20px;margin-bottom:0}
+  .dx-out{border-top:1px solid var(--line2);border-radius:20px}
   .steps{grid-template-columns:1fr 1fr;row-gap:36px}
   .steps-line{display:none}
   .spec{grid-template-columns:1fr}
   .faq{grid-template-columns:1fr;gap:20px}
 }
 @media (max-width:760px){
-  #lab{height:620vh}
-  .hero-copy{top:auto;bottom:max(84px,11svh);transform:translateY(var(--hy,0px));max-width:none;right:16px;left:16px}
+  .hero{padding:84px 16px 28px;min-height:auto;min-height:100svh}
   .eyebrow{font-size:11px;letter-spacing:.1em}
-  h1{font-size:clamp(38px,11vw,56px);margin:12px 0 14px}
-  .lead{font-size:15.5px}
-  .hero-ctas{margin-top:20px}
-  .hero-ctas .btn{padding:12px 18px;font-size:14.5px}
+  h1{font-size:clamp(40px,11.4vw,58px);margin:14px 0 16px}
+  .lead{font-size:16px}
+  .hero-ctas{margin-top:22px}
+  .hero-ctas .btn{flex:1 1 auto}
   .proof{display:none}
-  .hud{bottom:18px}
-  .panel{left:10px;right:10px;width:auto;top:auto;bottom:58px;transform:translateY(30px);height:min(44svh,400px);max-height:none;padding:16px 16px 14px;border-radius:16px}
-  .panel .fn{font-size:14.5px}
-  .p-sec{margin-top:14px}
-  .meter i{height:12px}
-  .lab.touring .panel{transform:none}
-  .panel h3{margin:8px 0 6px}
-  .rail{left:10px;right:10px;bottom:12px;justify-content:space-between}
-  .rail button{width:auto;flex:1}
-  .skip{display:none}
-  .tag span{display:none}
-  .tag{padding:4px}
-  .lab-intro{top:78px;left:16px;right:16px;max-width:none;transform:translateY(var(--iy,0px))}
-  .lab-intro h2{font-size:26px}
-  .lab-intro p{font-size:14px;margin-top:6px}
-  .sym-list{grid-template-columns:1fr 1fr}
-  .sym-btn{min-height:96px;padding:14px}
+  .ft{padding:12px}
+  .ft .led{right:10px;top:10px}
+  .ft b{font-size:12.5px;letter-spacing:0}
+  .seg button{padding:8px 10px;font-size:14px}
+  .seg button svg{display:none}
+  .sym-btn{min-height:64px;padding:12px;gap:10px}
   .sym-btn span{font-size:15px}
-  .bento{grid-template-columns:1fr}
+  .sym-btn svg{width:20px;height:20px}
+  .dx-stage{padding:14px 14px 4px}
+  .dx-out{padding:18px 18px 20px}
+  .dx-out .btn{width:100%}
+  .dev{max-height:190px}
+  .meter i{height:12px}
   .steps{grid-template-columns:1fr}
-  .grid-plan{grid-template-columns:130px repeat(24,minmax(0,1fr))}
-  .plan-scroll .grid-plan{min-width:640px}
+  .grid-plan{grid-template-columns:150px repeat(24,minmax(0,1fr))}
+  .plan-scroll .grid-plan{min-width:660px}
+  .gp-name{font-size:13.5px}
+  .gp-name small{display:none}
+  .gp-cell{height:30px}
+  .plan-top .seg{width:100%}
+  .swipe{display:block}
   .nav .btn span{display:none}
-  .nav .btn{padding:10px 12px}
-  .lab-fallback{right:50%;top:calc(var(--nav,64px) + 8px);transform:translateX(50%);width:min(52vw,34svh)}
+  .nav .btn{width:44px;padding:0}
+  .card{padding:22px}
+  .fr{padding:24px 20px 22px}
+  .fr .btn{align-self:stretch}
+  summary{font-size:17px}
+  details p{padding-right:0}
+  .final .btn{width:100%;max-width:360px}
 }
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .rv{opacity:1;transform:none;filter:none}
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .rv,.js .hi,.js .ft,.steps .step,.row .st{opacity:1!important;transform:none!important}
+  .js .hero h1 .ln>span{transform:none!important}
+  .dx-stage::after{display:none}
 }
 </style>
 </head>
@@ -366,11 +399,9 @@ footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
     <rect x="31" y="31" width="58" height="58" rx="10" fill="#050a17" stroke="url(#gS)" stroke-width="5"/>
     <path d="M47 44h27v8H56v4h15v8H56v4h18v8H47z" fill="url(#gE)"/>
   </symbol>
-  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.130 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.380a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.150l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.250-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.840-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.050.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12.5 9.5 18 20 6"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
-  <symbol id="i-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 5 8 12l7 7"/></symbol>
-  <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
   <symbol id="i-warn" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 3 2 20h20L12 3Z"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 10v4.5M12 17.5v.01"/></symbol>
   <symbol id="i-power" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 3v8M7 6.3a8 8 0 1 0 10 0"/></symbol>
@@ -379,14 +410,16 @@ footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
   <symbol id="i-heat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M10 14.5V5a2 2 0 1 1 4 0v9.5a4 4 0 1 1-4 0ZM12 9v7"/></symbol>
   <symbol id="i-noise" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 10v4h4l5 4V6L8 10H4ZM16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
   <symbol id="i-art" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M8 21h8M6 8l4 2M12 13l6-4M7 13h3"/></symbol>
-  <symbol id="i-format" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 20h6M7 12h6"/><path stroke="currentColor" stroke-width="3" stroke-linecap="round" d="M7 12h3" opacity=".5"/></symbol>
   <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="9.5" y="9.5" width="5" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><path stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></symbol>
   <symbol id="i-tools" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14.5 6.5a4 4 0 0 0 5 5L12 19l-2.5.5L10 17l7.5-7.5M4 4l5 5M3 7l4-4M9 9l-2 2"/></symbol>
-  <symbol id="i-scan" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m15.5 15.5 5 5M6.5 10.5h2l1-2.5 2 5 1-2.5h1.5"/></symbol>
-  <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 3 4.5 6v6c0 4.5 3.2 7.7 7.5 9 4.3-1.3 7.5-4.5 7.5-9V6L12 3Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
   <symbol id="i-office" viewBox="0 0 24 24"><rect x="3" y="5" width="11" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="10" y="11" width="11" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 16h2M13 21h4"/></symbol>
   <symbol id="i-game" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M7 7h10a4 4 0 0 1 4 4.4l-.5 4.6a2.6 2.6 0 0 1-4.7 1.2L14.5 15h-5l-1.3 2.2a2.6 2.6 0 0 1-4.7-1.2L3 11.4A4 4 0 0 1 7 7Z"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M8 10v3M6.5 11.5h3M15.5 11h.01M17.5 12.5h.01"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3.5 11 12 4l8.5 7M6 9.5V20h12V9.5"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M10 20v-5h4v5"/></symbol>
+  <symbol id="i-tower" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="14" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 6.5h6"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4.5" y="4.5" width="15" height="10.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2.5 18.5h19l-1.5-3.5H4z"/></symbol>
+  <symbol id="i-hdmi" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 8h18v5l-3 3H6l-3-3z"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M7 11.5h10"/></symbol>
+  <symbol id="i-disc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M7 9.5a5.5 5.5 0 0 1 2.5-2.5"/></symbol>
+  <symbol id="i-keys" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 10h.01M9.5 10h.01M13 10h.01M16.5 10h.01M8 14h8"/></symbol>
 </svg>
 
 <canvas id="bg" aria-hidden="true"></canvas>
@@ -401,101 +434,174 @@ footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
     <span class="wm">ELTEC</span>
   </a>
   <ul>
-    <li><a href="#topo" data-go="0">Abrir o PC</a></li>
-    <li><a href="#sintomas">Sintomas</a></li>
+    <li><a href="#frentes">Serviços</a></li>
+    <li><a href="#diagnostico">Diagnóstico</a></li>
     <li><a href="#plano">Plano</a></li>
-    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#processo">Como funciona</a></li>
     <li><a href="#faq">Dúvidas</a></li>
   </ul>
-  <a class="btn btn-wa" data-wa="Olá ELTEC! Vim pelo site e quero um orçamento." href="#" target="_blank" rel="noopener">
+  <a class="btn btn-wa" data-wa="Olá ELTEC! Vim pelo site e quero um orçamento." href="https://wa.me/5565999857609" target="_blank" rel="noopener" aria-label="Pedir orçamento no WhatsApp">
     <svg aria-hidden="true"><use href="#i-wa"/></svg><span>Orçamento</span>
   </a>
 </header>
 
 <main id="topo">
-  <!-- ===== LAB: hero + PC 3D que abre no scroll ===== -->
-  <section id="lab" aria-label="Abra o computador e conheça cada peça">
-    <div class="lab-sticky lab" id="labStage">
-      <div class="lab-glow" aria-hidden="true"></div>
-      <canvas id="gl" aria-label="Computador em 3D. Toque nas peças para ver detalhes."></canvas>
-      <div class="lab-fallback" aria-hidden="true"><svg width="100%" height="100%"><use href="#logo"/></svg></div>
-
-      <div class="hero-copy">
-        <div class="eyebrow"><i></i>Assistência técnica · Tangará da Serra MT</div>
-        <h1>Vamos abrir<br>o seu <em>PC?</em></h1>
-        <p class="lead">Cada peça tem um tempo certo de cuidado. Role a página, veja o computador se desmontar e toque em qualquer peça para saber o que ela faz, como ela avisa que está mal e quando revisar.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-wa" data-wa="Olá ELTEC! Vim pelo site e quero falar sobre o meu computador." href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Chamar no WhatsApp</a>
-          <button class="btn btn-ghost" data-go="0">Abrir o PC <svg aria-hidden="true" style="transform:rotate(90deg)"><use href="#i-arrow"/></svg></button>
-        </div>
-        <div class="proof">
-          <span><svg><use href="#i-check"/></svg>Diagnóstico preciso</span>
-          <span><svg><use href="#i-check"/></svg>Peças de qualidade</span>
-          <span><svg><use href="#i-check"/></svg>Garantia em todos os serviços</span>
-        </div>
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero" aria-label="ELTEC, assistência técnica de PC e console">
+    <div class="hero-copy">
+      <div class="eyebrow hi" style="--d:.05s"><i></i>Assistência técnica · Tangará da Serra MT</div>
+      <h1><span class="ln"><span style="--d:.12s">PC mais rápido.</span></span><span class="ln"><span style="--d:.24s">Console <em>no frio.</em></span></span></h1>
+      <p class="lead hi" style="--d:.4s">A ELTEC cuida do seu computador, do notebook e do videogame. Upgrade, manutenção e conserto em Tangará da Serra. Conta o que está acontecendo e a gente diz por onde começar.</p>
+      <div class="hero-ctas hi" style="--d:.52s">
+        <a class="btn btn-wa" data-wa="Olá ELTEC! Vim pelo site e quero falar sobre o meu PC ou console." href="https://wa.me/5565999857609" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Chamar no WhatsApp</a>
+        <a class="btn btn-ghost" href="#diagnostico">Descobrir o problema <svg aria-hidden="true" style="transform:rotate(90deg)"><use href="#i-arrow"/></svg></a>
       </div>
-
-      <div class="lab-intro">
-        <div class="kicker">Modo bancada</div>
-        <h2>Tirando a tampa.</h2>
-        <p>Assim que tudo se separar, toque numa peça ou use os números lá embaixo.</p>
+      <div class="proof hi" style="--d:.64s">
+        <span><svg aria-hidden="true"><use href="#i-check"/></svg>Diagnóstico antes de trocar peça</span>
+        <span><svg aria-hidden="true"><use href="#i-check"/></svg>Orçamento antes de começar</span>
+        <span><svg aria-hidden="true"><use href="#i-check"/></svg>Garantia no serviço</span>
       </div>
+    </div>
+    <nav class="fronts" aria-label="O que a ELTEC faz">
+      <a class="ft" href="#upgrade" style="--d:.45s;--ld:0s"><span class="led" aria-hidden="true"></span><span class="ic"><svg aria-hidden="true"><use href="#i-chip"/></svg></span><span><b>Upgrade de PC</b><small>SSD, memória, placa de vídeo e PC gamer montado.</small></span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="ft" href="#manutencao" style="--d:.58s;--ld:.7s"><span class="led" aria-hidden="true"></span><span class="ic"><svg aria-hidden="true"><use href="#i-tools"/></svg></span><span><b>Manutenção</b><small>Limpeza, pasta térmica, formatação, PC e notebook.</small></span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="ft" href="#consoles" style="--d:.71s;--ld:1.4s"><span class="led" aria-hidden="true"></span><span class="ic"><svg aria-hidden="true"><use href="#i-game"/></svg></span><span><b>Consoles</b><small>PS4, PS5, Xbox e Switch. Calor, HDMI e controle.</small></span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </nav>
+    <span class="cue hi" style="--d:1s" aria-hidden="true"></span>
+  </section>
 
-      <div class="tags" id="tags"></div>
-
-      <aside class="panel" id="panel" aria-live="polite">
-        <div class="p-top"><span class="num" id="pNum">01 / 09</span><span id="pTag">Peça</span></div>
-        <div class="p-body" id="pBody">
-          <h3 id="pName">Peça</h3>
-          <p class="fn" id="pFn"></p>
-          <div class="p-sec"><div class="p-lbl">Sinais de alerta</div><div class="chips" id="pSig"></div></div>
-          <div class="p-sec"><div class="p-lbl">O que a gente faz</div><p class="p-care" id="pCare"></p></div>
-          <div class="p-sec">
-            <div class="p-lbl">Periodicidade</div>
-            <div class="period"><strong id="pEvery"></strong><small>próximos 24 meses</small></div>
-            <div class="meter" id="pMeter"></div>
-            <div class="meter-axis"><span>hoje</span><span>6m</span><span>12m</span><span>18m</span><span>24m</span></div>
-            <p class="p-note" id="pNote"></p>
-          </div>
-        </div>
-        <div class="p-cta">
-          <a id="pWa" href="#" target="_blank" rel="noopener"><svg width="16" height="16"><use href="#i-wa"/></svg>Perguntar sobre esta peça</a>
-          <div class="p-nav"><button id="pPrev" aria-label="Peça anterior"><svg><use href="#i-left"/></svg></button><button id="pNext" aria-label="Próxima peça"><svg><use href="#i-right"/></svg></button></div>
-        </div>
-      </aside>
-
-      <nav class="rail" id="rail" aria-label="Peças do computador"></nav>
-      <button class="skip" id="skip">Pular a bancada ↓</button>
-
-      <div class="hud" aria-hidden="true">
-        <div class="mouse"></div>
-        <span id="hudTxt">Role para abrir o gabinete</span>
-        <div class="bar"><b id="hudBar"></b></div>
+  <!-- ===== FRENTES ===== -->
+  <section class="s" id="frentes">
+    <div class="wrap">
+      <div class="s-head">
+        <div class="rv"><div class="kicker">O que a gente faz</div><h2>Três frentes,<br>uma <em>bancada.</em></h2></div>
+        <p class="rv" style="--d:.1s">Do PC que ficou lento ao PS5 que parece um avião. Tudo passa por diagnóstico antes e sai testado depois.</p>
+      </div>
+      <div class="trio">
+        <article class="card fr rv" id="upgrade">
+          <span class="cn">01</span>
+          <div class="ic"><svg aria-hidden="true"><use href="#i-chip"/></svg></div>
+          <div class="sub">Upgrade de PC</div>
+          <h3>Mais rápido sem trocar tudo.</h3>
+          <ul>
+            <li><span>SSD no lugar do HD<small>Liga em segundos e os programas abrem na hora.</small></span></li>
+            <li><span>Memória RAM<small>Mais abas e programas abertos sem engasgar.</small></span></li>
+            <li><span>Placa de vídeo e fonte<small>Jogo mais fluido, com energia estável para a peça nova.</small></span></li>
+            <li><span>Refrigeração<small>Menos calor e menos barulho em jogo pesado.</small></span></li>
+            <li><span>PC gamer montado<small>A gente ajuda a escolher as peças e monta para você.</small></span></li>
+          </ul>
+          <a class="btn btn-wa" data-wa="Olá ELTEC! Quero fazer um upgrade no meu PC. Podem me ajudar a escolher as peças?" href="https://wa.me/5565999857609" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Falar de upgrade</a>
+        </article>
+        <article class="card fr rv" id="manutencao" style="--d:.1s">
+          <span class="cn">02</span>
+          <div class="ic"><svg aria-hidden="true"><use href="#i-tools"/></svg></div>
+          <div class="sub">PC e notebook</div>
+          <h3>Manutenção que evita o susto.</h3>
+          <ul>
+            <li><span>Limpeza interna<small>Poeira fora das ventoinhas, filtros e dissipadores.</small></span></li>
+            <li><span>Troca de pasta térmica<small>Com temperatura medida antes e depois.</small></span></li>
+            <li><span>Formatação com backup<small>Seus arquivos voltam para o lugar. Sistema limpo e com drivers.</small></span></li>
+            <li><span>Tela e teclado de notebook<small>Troca de tela trincada e de teclado que parou.</small></span></li>
+            <li><span>Diagnóstico de falhas<small>Não liga, tela azul, travamento. A causa vem antes da troca.</small></span></li>
+          </ul>
+          <a class="btn btn-wa" data-wa="Olá ELTEC! Meu computador ou notebook precisa de manutenção." href="https://wa.me/5565999857609" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Falar de manutenção</a>
+        </article>
+        <article class="card fr rv" id="consoles" style="--d:.2s">
+          <span class="cn">03</span>
+          <div class="ic"><svg aria-hidden="true"><use href="#i-game"/></svg></div>
+          <div class="sub">Consoles e controles</div>
+          <h3>Videogame frio e jogando.</h3>
+          <div class="models" aria-label="Modelos atendidos"><span>PS4</span><span>PS5</span><span>Xbox One</span><span>Xbox Series</span><span>Switch</span></div>
+          <ul>
+            <li><span>Limpeza e pasta térmica<small>Para o console que esquenta ou faz barulho alto.</small></span></li>
+            <li><span>Troca de HDMI<small>Quando a TV fica sem sinal por causa da porta.</small></span></li>
+            <li><span>Analógico com drift<small>O controle que anda sozinho volta a obedecer.</small></span></li>
+            <li><span>Fonte, leitor de disco e ventoinha<small>Console que não liga, não lê jogo ou ronca.</small></span></li>
+          </ul>
+          <a class="btn btn-wa" data-wa="Olá ELTEC! Meu console precisa de manutenção. O modelo é:" href="https://wa.me/5565999857609" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Falar do console</a>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ===== SINTOMAS ===== -->
-  <section class="s" id="sintomas">
+  <!-- ===== DIAGNÓSTICO ===== -->
+  <section class="s" id="diagnostico">
     <div class="wrap">
       <div class="s-head">
-        <div class="rv"><div class="kicker">Sintomas</div><h2>Ele está<br>dando <em>sinal.</em></h2></div>
-        <p class="rv" style="--d:.1s">Computador quase nunca quebra do nada. Ele avisa antes. Toque no que o seu anda fazendo e veja por onde a gente começa a olhar.</p>
+        <div class="rv"><div class="kicker">Pré-diagnóstico</div><h2>Ele está<br>dando <em>sinal.</em></h2></div>
+        <p class="rv" style="--d:.1s">Equipamento quase nunca quebra do nada. Ele avisa antes. Escolha o aparelho, toque no sintoma e veja onde a gente começa a olhar.</p>
       </div>
-      <div class="sym">
-        <div class="sym-list rv" id="symList"></div>
-        <div class="diag rv" style="--d:.12s">
-          <div class="diag-top"><span>ELTEC // pré-diagnóstico</span><span class="live"><i></i>online</span></div>
-          <h3 id="dTitle">Não liga</h3>
-          <div class="term" id="dTerm"></div>
-          <dl>
-            <div><dt>Causa mais comum</dt><dd id="dCause"></dd></div>
-            <div><dt>O que a gente faz</dt><dd id="dFix"></dd></div>
-          </dl>
-          <div class="diag-act">
-            <a class="btn btn-wa" id="dWa" href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Mandar esse sintoma</a>
-            <button class="btn btn-ghost" id="dSee">Ver a peça no PC</button>
+      <div class="dx rv">
+        <div class="seg" id="devSeg" role="tablist" aria-label="Aparelho" style="--n:3">
+          <span class="pill" aria-hidden="true"></span>
+          <button role="tab" class="on" data-dev="pc" aria-selected="true"><svg aria-hidden="true"><use href="#i-tower"/></svg>PC</button>
+          <button role="tab" data-dev="note" aria-selected="false"><svg aria-hidden="true"><use href="#i-laptop"/></svg>Notebook</button>
+          <button role="tab" data-dev="console" aria-selected="false"><svg aria-hidden="true"><use href="#i-game"/></svg>Console</button>
+        </div>
+        <div class="dx-syms" id="dxSyms" aria-label="Sintomas"></div>
+        <div class="dx-panel dx-stage">
+          <div class="dx-top"><span>ELTEC // bancada</span><span class="live"><i></i>online</span></div>
+          <svg class="dev" id="dev" viewBox="0 0 360 230" role="img" aria-label="Desenho do aparelho com a peça suspeita marcada">
+            <g class="g on" data-dev="pc">
+              <g class="base">
+                <rect class="fillp" x="104" y="12" width="152" height="206" rx="12"/>
+                <rect x="116" y="26" width="104" height="128" rx="4"/>
+                <path d="M244 26v180M104 196h152"/>
+                <g data-k="cpu"><rect x="150" y="40" width="44" height="44" rx="4"/><circle cx="172" cy="62" r="15"/><path d="M172 47v30M157 62h30"/></g>
+                <g data-k="ram"><rect x="202" y="36" width="6" height="52" rx="1"/><rect x="211" y="36" width="6" height="52" rx="1"/></g>
+                <g data-k="ssd"><rect x="126" y="98" width="40" height="9" rx="2"/></g>
+                <g data-k="gpu"><rect x="122" y="118" width="112" height="22" rx="3"/><circle cx="150" cy="129" r="7"/><circle cx="182" cy="129" r="7"/></g>
+                <g data-k="psu"><rect x="116" y="164" width="96" height="44" rx="4"/><circle cx="164" cy="186" r="13"/></g>
+                <g data-k="fan"><circle cx="250" cy="62" r="0"/><rect x="230" y="38" width="22" height="48" rx="4"/><circle cx="241" cy="52" r="7"/><circle cx="241" cy="72" r="7"/></g>
+              </g>
+              <g class="hl"></g>
+            </g>
+            <g class="g" data-dev="note">
+              <g class="base">
+                <g data-k="screen"><rect class="fillp" x="80" y="14" width="200" height="128" rx="8"/><rect x="92" y="25" width="176" height="106" rx="3"/></g>
+                <path class="fillp" d="M60 150h240l14 34H46z"/>
+                <path d="M46 184h268v8a6 6 0 0 1-6 6H52a6 6 0 0 1-6-6z"/>
+                <g data-k="kbd"><path d="M94 158h172M90 166h180M86 174h188"/><rect x="152" y="186" width="56" height="6" rx="2"/></g>
+                <g data-k="vent"><path d="M300 162l4 0M302 168l5 0M304 174l5 0"/><circle cx="292" cy="170" r="10"/></g>
+                <g data-k="chg"><rect x="50" y="186" width="14" height="6" rx="2"/><path d="M57 192v14q0 8-10 8H20"/></g>
+                <g data-k="ssd"><rect x="196" y="186" width="40" height="6" rx="2"/></g>
+              </g>
+              <g class="hl"></g>
+            </g>
+            <g class="g" data-dev="console">
+              <g class="base">
+                <rect class="fillp" x="26" y="60" width="200" height="120" rx="16"/>
+                <path d="M26 92h200"/>
+                <g data-k="vent"><path d="M44 72h14M64 72h14M84 72h14M104 72h14M124 72h14M144 72h14M164 72h14M184 72h14"/></g>
+                <g data-k="fan"><circle cx="186" cy="136" r="22"/><path d="M186 114v44M164 136h44"/></g>
+                <g data-k="drive"><rect x="44" y="104" width="100" height="8" rx="4"/></g>
+                <g data-k="psu"><circle cx="54" cy="150" r="9"/><path d="M54 145v5"/></g>
+                <g data-k="hdmi"><path d="M226 128h14v16h-14"/><path d="M240 136h16"/></g>
+                <path class="fillp" d="M262 132h70a18 18 0 0 1 17 22l-4 22a10 10 0 0 1-18 4l-8-12h-44l-8 12a10 10 0 0 1-18-4l-4-22a18 18 0 0 1 17-22z"/>
+                <g data-k="stick"><circle cx="280" cy="156" r="9"/><circle cx="280" cy="156" r="3"/></g>
+                <circle cx="314" cy="156" r="9"/><path d="M332 146h.01M340 152h.01"/>
+              </g>
+              <g class="hl"></g>
+            </g>
+            <g class="hot" id="hot"><circle class="ring" r="8"/><circle class="ring ring2" r="8"/><circle r="4.5"/></g>
+          </svg>
+        </div>
+        <div class="dx-panel dx-out" aria-live="polite">
+          <div class="dx-body" id="dxBody">
+            <h3 id="dTitle">Não liga</h3>
+            <div class="term" id="dTerm"></div>
+            <dl>
+              <div><dt>Causa provável</dt><dd id="dCause"></dd></div>
+              <div><dt>O que a ELTEC faz</dt><dd id="dFix"></dd></div>
+              <div><dt>Quando revisar</dt><dd>
+                <div class="period"><strong id="dEvery"></strong><small>próximos 24 meses</small></div>
+                <div class="meter" id="dMeter"></div>
+                <div class="meter-axis"><span>hoje</span><span>6m</span><span>12m</span><span>18m</span><span>24m</span></div>
+                <p class="dx-note" id="dNote"></p>
+              </dd></div>
+            </dl>
           </div>
+          <div class="dx-act"><a class="btn btn-wa" id="dWa" href="https://wa.me/5565999857609" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Mandar esse sintoma</a></div>
         </div>
       </div>
     </div>
@@ -506,37 +612,21 @@ footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
     <div class="wrap">
       <div class="s-head">
         <div class="rv"><div class="kicker">Periodicidade</div><h2>Manutenção<br>tem <em>calendário.</em></h2></div>
-        <p class="rv" style="--d:.1s">Poeira, calor e desgaste se acumulam devagar até o dia em que o PC trava. Escolha como você usa o seu e veja o que fazer nos próximos 24 meses.</p>
+        <p class="rv" style="--d:.1s">Poeira, calor e desgaste se acumulam devagar até o dia em que trava. Escolha como você usa o seu equipamento e veja o que fazer nos próximos 24 meses.</p>
       </div>
       <div class="plan rv">
         <div class="plan-top">
-          <div class="seg" id="seg" role="tablist" aria-label="Tipo de uso">
+          <div class="seg" id="seg" role="tablist" aria-label="Tipo de uso" style="--n:3">
             <span class="pill" aria-hidden="true"></span>
-            <button role="tab" class="on" data-p="casa">Casa e estudo</button>
-            <button role="tab" data-p="gamer">Gamer e edição</button>
-            <button role="tab" data-p="empresa">Empresa</button>
+            <button role="tab" class="on" data-p="casa" aria-selected="true">PC de casa</button>
+            <button role="tab" data-p="gamer" aria-selected="false">PC gamer</button>
+            <button role="tab" data-p="console" aria-selected="false">Console</button>
           </div>
           <div class="plan-sum" id="planSum"></div>
         </div>
+        <div class="swipe" aria-hidden="true">Arraste para o lado para ver os 24 meses</div>
         <div class="plan-scroll"><div class="grid-plan" id="gridPlan"></div></div>
-        <p class="plan-note"><svg><use href="#i-warn"/></svg><span>Referência geral. Pet em casa, poeira de rua, fumaça ou PC no chão pedem intervalos menores. No diagnóstico a gente ajusta o calendário para o seu caso.</span></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SERVIÇOS ===== -->
-  <section class="s" id="servicos">
-    <div class="wrap">
-      <div class="s-head">
-        <div class="rv"><div class="kicker">Serviços</div><h2>O que sai<br>da nossa <em>bancada.</em></h2></div>
-        <p class="rv" style="--d:.1s">De um PC que não liga a um parque de máquinas de escritório. Tudo com diagnóstico antes e garantia depois.</p>
-      </div>
-      <div class="bento">
-        <article class="card wide rv"><span class="cn">01</span><div class="ic"><svg><use href="#i-tools"/></svg></div><h3>Manutenção preventiva</h3><p>Limpeza interna completa para evitar superaquecimento e problemas futuros.</p><ul><li>Remoção de poeira de ventoinhas, filtros e dissipadores</li><li>Troca de pasta térmica</li><li>Verificação completa de peças e temperaturas</li></ul></article>
-        <article class="card wide rv" style="--d:.08s"><span class="cn">02</span><div class="ic"><svg><use href="#i-format"/></svg></div><h3>Formatação e otimização</h3><p>O PC volta a abrir rápido e limpo, sem você perder o que importa.</p><ul><li>Backup dos seus arquivos antes de tudo</li><li>Windows, programas e drivers instalados</li><li>Sistema enxuto e otimizado</li></ul></article>
-        <article class="card rv"><span class="cn">03</span><div class="ic"><svg><use href="#i-chip"/></svg></div><h3>Upgrade de hardware</h3><p>Mais velocidade sem trocar o computador inteiro.</p><ul><li>SSD</li><li>Memória RAM</li><li>Placa de vídeo e fonte</li></ul></article>
-        <article class="card rv" style="--d:.08s"><span class="cn">04</span><div class="ic"><svg><use href="#i-scan"/></svg></div><h3>Diagnóstico de falhas</h3><p>Não liga, tela azul, travamento, ruído. A gente acha a causa antes de trocar qualquer peça.</p></article>
-        <article class="card rv" style="--d:.16s"><span class="cn">05</span><div class="ic"><svg><use href="#i-shield"/></svg></div><h3>Segurança e backup</h3><p>Remoção de vírus, proteção dos dados e backup para você não perder fotos, trabalhos e documentos.</p></article>
+        <p class="plan-note"><svg aria-hidden="true"><use href="#i-warn"/></svg><span>Referência geral. Pet em casa, poeira de rua, fumaça, equipamento no chão ou console em rack fechado pedem intervalos menores. No diagnóstico a gente ajusta o calendário para o seu caso.</span></p>
       </div>
     </div>
   </section>
@@ -548,12 +638,12 @@ footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
         <div class="rv"><div class="kicker">Como funciona</div><h2>Do primeiro oi<br>à <em>entrega.</em></h2></div>
         <p class="rv" style="--d:.1s">Você sabe o que vai ser feito e quanto custa antes da gente começar.</p>
       </div>
-      <div class="steps rv" id="steps">
-        <svg class="steps-line" viewBox="0 0 100 2" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M3 1H97"/></svg>
-        <div class="step"><div class="n">01</div><h3>Chama no WhatsApp</h3><p>Conta o que está acontecendo. Se der, manda foto ou vídeo do erro.</p></div>
-        <div class="step"><div class="n">02</div><h3>Diagnóstico</h3><p>A gente abre, testa e encontra a causa real do problema.</p></div>
-        <div class="step"><div class="n">03</div><h3>Orçamento</h3><p>Você recebe o que precisa ser feito e o valor. Só seguimos com o seu ok.</p></div>
-        <div class="step"><div class="n">04</div><h3>Entrega com garantia</h3><p>PC testado, limpo e com garantia no serviço.</p></div>
+      <div class="steps" id="steps">
+        <span class="steps-line" aria-hidden="true"></span>
+        <div class="step" style="--k:0"><div class="n">01</div><h3>Chama no WhatsApp</h3><p>Conta o que está acontecendo com o PC, o notebook ou o console. Se der, manda foto ou vídeo.</p></div>
+        <div class="step" style="--k:1"><div class="n">02</div><h3>Diagnóstico</h3><p>A gente abre, testa e encontra a causa real do problema.</p></div>
+        <div class="step" style="--k:2"><div class="n">03</div><h3>Orçamento</h3><p>Você recebe o que precisa ser feito e o valor. Só seguimos com o seu ok.</p></div>
+        <div class="step" style="--k:3"><div class="n">04</div><h3>Entrega testada</h3><p>Equipamento limpo, testado e com garantia no serviço.</p></div>
       </div>
     </div>
   </section>
@@ -563,21 +653,21 @@ footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
     <div class="wrap">
       <div class="s-head">
         <div class="rv"><div class="kicker">Por que a ELTEC</div><h2>Nosso padrão<br>de <em>serviço.</em></h2></div>
-        <p class="rv" style="--d:.1s">É o que você pode cobrar da gente em todo atendimento, seja uma formatação ou uma placa-mãe.</p>
+        <p class="rv" style="--d:.1s">É o que você pode cobrar da gente em todo atendimento, seja uma formatação, um SSD novo ou um HDMI de PS5.</p>
       </div>
       <div class="spec">
         <div class="sheet rv">
           <div class="sheet-h"><span>ELTEC // checklist</span><span>todo atendimento</span></div>
-          <div class="row"><span class="k">01</span><span class="v">Diagnóstico preciso<small>A causa é encontrada antes de qualquer troca de peça.</small></span><span class="st">ok</span></div>
-          <div class="row"><span class="k">02</span><span class="v">Peças de qualidade<small>Nada de peça duvidosa que volta a dar defeito.</small></span><span class="st">ok</span></div>
-          <div class="row"><span class="k">03</span><span class="v">Garantia em todos os serviços<small>Se o problema voltar, você chama a gente.</small></span><span class="st">ok</span></div>
-          <div class="row"><span class="k">04</span><span class="v">Técnicos experientes<small>Hardware e software no mesmo lugar.</small></span><span class="st">ok</span></div>
-          <div class="row"><span class="k">05</span><span class="v">Atendimento rápido e profissional<small>Prazo combinado no diagnóstico e cumprido.</small></span><span class="st">ok</span></div>
+          <div class="row" style="--k:0"><span class="k">01</span><span class="v">Diagnóstico preciso<small>A causa é encontrada antes de qualquer troca de peça.</small></span><span class="st">ok</span></div>
+          <div class="row" style="--k:1"><span class="k">02</span><span class="v">Peças de qualidade<small>Nada de peça duvidosa que volta a dar defeito.</small></span><span class="st">ok</span></div>
+          <div class="row" style="--k:2"><span class="k">03</span><span class="v">Garantia em todos os serviços<small>Se o problema voltar, você chama a gente.</small></span><span class="st">ok</span></div>
+          <div class="row" style="--k:3"><span class="k">04</span><span class="v">Técnicos experientes<small>Hardware, software e console no mesmo lugar.</small></span><span class="st">ok</span></div>
+          <div class="row" style="--k:4"><span class="k">05</span><span class="v">Atendimento rápido e profissional<small>Prazo combinado no diagnóstico e cumprido.</small></span><span class="st">ok</span></div>
         </div>
         <div class="who">
-          <article class="card rv" style="--d:.06s"><div class="ic"><svg><use href="#i-home"/></svg></div><h3>Casa e estudo</h3><p>O PC da família rápido de novo, com fotos e trabalhos guardados em segurança.</p></article>
-          <article class="card rv" style="--d:.12s"><div class="ic"><svg><use href="#i-game"/></svg></div><h3>Gamer</h3><p>Upgrades, temperatura sob controle e sistema otimizado. Jogue sem travar.</p></article>
-          <article class="card rv" style="--d:.18s"><div class="ic"><svg><use href="#i-office"/></svg></div><h3>Empresas</h3><p>Manutenção preventiva e suporte técnico para reduzir paradas. Menos problema, mais resultado.</p></article>
+          <article class="card rv" style="--d:.06s"><div class="ic"><svg aria-hidden="true"><use href="#i-home"/></svg></div><h3>Casa e estudo</h3><p>O PC da família rápido de novo, com fotos e trabalhos guardados em segurança.</p></article>
+          <article class="card rv" style="--d:.12s"><div class="ic"><svg aria-hidden="true"><use href="#i-game"/></svg></div><h3>Gamer</h3><p>Upgrade, PC montado e console em dia. Temperatura sob controle para jogar sem travar.</p></article>
+          <article class="card rv" style="--d:.18s"><div class="ic"><svg aria-hidden="true"><use href="#i-office"/></svg></div><h3>Empresas</h3><p>Manutenção preventiva e suporte técnico para as máquinas do seu time pararem menos.</p></article>
         </div>
       </div>
     </div>
@@ -588,11 +678,14 @@ footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
     <div class="wrap faq">
       <div class="rv"><div class="kicker">Dúvidas</div><h2>Perguntas que todo mundo faz.</h2></div>
       <div class="faq-list rv" style="--d:.1s">
-        <details><summary>Vou perder meus arquivos na formatação?<i></i></summary><p>Não. Antes de formatar, a gente faz o backup dos seus arquivos. Depois que o sistema está pronto, eles voltam para o lugar.</p></details>
+        <details><summary>Meu PS4 ou PS5 parece um avião. Tem jeito?<i></i></summary><p>Quase sempre tem. O barulho alto costuma ser poeira travando o ar e pasta térmica seca, aí a ventoinha gira no máximo. Limpeza interna e pasta nova resolvem na maioria dos casos.</p></details>
+        <details><summary>O controle está andando sozinho. Precisa comprar outro?<i></i></summary><p>Não necessariamente. Isso é drift, desgaste no módulo do analógico. A gente troca o módulo e o controle volta a obedecer. Vale para controle de PlayStation, Xbox e Joy-Con.</p></details>
+        <details><summary>O console liga, mas a TV fica sem sinal. O que é?<i></i></summary><p>Pode ser o cabo, a TV ou a porta HDMI do console. A gente testa os três. Se for a porta, faz a troca do HDMI e testa a imagem antes de devolver.</p></details>
+        <details><summary>Vale a pena colocar SSD no meu PC ou notebook?<i></i></summary><p>Em quem ainda usa HD, é o upgrade que mais se sente: o computador liga em segundos e os programas abrem na hora. A gente confere antes se o seu modelo aceita.</p></details>
+        <details><summary>Vocês ajudam a escolher as peças de um PC gamer?<i></i></summary><p>Sim. Você conta o que quer jogar e quanto pretende investir. A gente indica peças que conversam entre si, com fonte certa para a placa de vídeo, e monta para você.</p></details>
         <details><summary>Vale mais consertar ou comprar outro?<i></i></summary><p>Depende do que o diagnóstico mostrar. Muitas vezes um SSD e mais memória dão anos de vida a um PC lento. Quando não compensa, a gente fala com franqueza.</p></details>
-        <details><summary>Quanto tempo o PC fica com vocês?<i></i></summary><p>Depende do serviço e de precisar de peça. O prazo sai junto com o orçamento, antes de você aprovar.</p></details>
-        <details><summary>De quanto em quanto tempo devo fazer manutenção?<i></i></summary><p>Para uso em casa, uma limpeza interna a cada 6 meses resolve bem. Gamer, empresa e ambiente com poeira pedem mais. Veja o calendário acima para o seu tipo de uso.</p></details>
-        <details><summary>Vocês atendem empresas?<i></i></summary><p>Sim. Manutenção preventiva, suporte técnico especializado e upgrade de máquinas para o seu time parar menos.</p></details>
+        <details><summary>Vou perder meus arquivos na formatação?<i></i></summary><p>Não. Antes de formatar, a gente faz o backup dos seus arquivos. Depois que o sistema está pronto, eles voltam para o lugar.</p></details>
+        <details><summary>Quanto tempo o equipamento fica com vocês?<i></i></summary><p>Depende do serviço e de precisar de peça. O prazo sai junto com o orçamento, antes de você aprovar.</p></details>
         <details><summary>O serviço tem garantia?<i></i></summary><p>Tem. Todos os serviços da ELTEC saem com garantia.</p></details>
       </div>
     </div>
@@ -601,152 +694,182 @@ footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
   <!-- ===== CTA FINAL ===== -->
   <section class="final" id="contato">
     <svg class="chipbig rv" aria-hidden="true"><use href="#logo"/></svg>
-    <h2 class="rv" style="--d:.06s">Seu PC pediu socorro?<br><em>A ELTEC resolve.</em></h2>
+    <h2 class="rv" style="--d:.06s">PC ou console<br>pedindo socorro?<br><em>A ELTEC resolve.</em></h2>
     <p class="rv" style="--d:.12s">Manda uma mensagem contando o que está acontecendo. A gente responde com o próximo passo.</p>
-    <a class="btn btn-wa rv" style="--d:.18s" data-wa="Olá ELTEC! Vim pelo site e meu computador precisa de ajuda." href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>(65) 99985-7609</a>
+    <a class="btn btn-wa rv" style="--d:.18s" data-wa="Olá ELTEC! Vim pelo site e meu equipamento precisa de ajuda." href="https://wa.me/5565999857609" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>(65) 99985-7609</a>
     <div class="meta rv" style="--d:.24s">
-      <span><svg><use href="#i-pin"/></svg>Tangará da Serra · MT</span>
-      <span><svg><use href="#i-wa"/></svg>Orçamento pelo WhatsApp ou pelo Direct</span>
+      <span><svg aria-hidden="true"><use href="#i-pin"/></svg>Tangará da Serra · MT</span>
+      <span><svg aria-hidden="true"><use href="#i-wa"/></svg>Orçamento pelo WhatsApp</span>
     </div>
   </section>
 </main>
 
 <footer>
-  <a class="brand" href="#topo"><svg aria-hidden="true"><use href="#logo"/></svg><span class="wm">ELTEC</span></a>
+  <a class="brand" href="#topo" aria-label="ELTEC, voltar ao topo"><svg aria-hidden="true"><use href="#logo"/></svg><span class="wm">ELTEC</span></a>
   <span class="slogan">Tecnologia que conecta.</span>
-  <span>Assistência técnica de computadores · Tangará da Serra MT · © <span id="yr"></span></span>
+  <span>PC, notebook e console · Tangará da Serra MT · © <span id="yr"></span></span>
 </footer>
 
-<a class="fab" id="fab" data-wa="Olá ELTEC! Vim pelo site e quero um orçamento." href="#" target="_blank" rel="noopener" aria-label="Falar com a ELTEC no WhatsApp"><svg><use href="#i-wa"/></svg></a>
+<a class="fab" id="fab" data-wa="Olá ELTEC! Vim pelo site e quero um orçamento." href="https://wa.me/5565999857609" target="_blank" rel="noopener" aria-label="Falar com a ELTEC no WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
 <script>
 /* ======================= DADOS ======================= */
 const WA = '5565999857609';
 const waLink = m => 'https://wa.me/' + WA + '?text=' + encodeURIComponent(m);
 
-const PARTS = [
-  {id:'fans', tag:'Refrigeração', name:'Ventoinhas e fluxo de ar',
-   fn:'Puxam ar frio pela frente e jogam o ar quente para fora por trás. Sem esse caminho livre, todo o resto esquenta.',
-   sig:['Barulho alto ou zumbido','Ventoinha que para e volta','Gabinete quente ao toque'],
-   care:'Limpeza das pás e dos filtros, conferência dos rolamentos e do sentido do ar. Ventoinha com ruído a gente troca antes que trave.',
-   every:6, label:'A cada 6 meses', note:'A cada 3 meses se tem pet, poeira de rua ou o PC fica no chão.'},
-  {id:'cpu', tag:'Processamento', name:'Processador e cooler',
-   fn:'O cérebro do PC. O cooler e a pasta térmica tiram o calor dele o tempo todo.',
-   sig:['Desliga sozinho em tarefa pesada','Fica mais lento com o tempo ligado','Cooler sempre no máximo'],
-   care:'Limpeza do dissipador e troca da pasta térmica, que resseca e para de conduzir calor. Medimos a temperatura antes e depois.',
-   every:12, label:'Pasta a cada 12 a 24 meses', note:'Limpeza do dissipador junto com a preventiva de 6 meses.'},
-  {id:'ram', tag:'Memória', name:'Memória RAM',
-   fn:'Guarda tudo o que está aberto agora. Pouca memória ou um pente com defeito trava o computador inteiro.',
-   sig:['Tela azul aleatória','Programas fechando sozinhos','Liga mas não dá vídeo'],
-   care:'Limpeza dos contatos, teste de memória completo e, se fizer sentido para o seu uso, upgrade.',
-   every:6, label:'Revisão a cada 6 meses', note:'Junto com a limpeza interna. Teste completo sempre que aparecer tela azul.'},
-  {id:'gpu', tag:'Vídeo', name:'Placa de vídeo',
-   fn:'Desenha tudo o que aparece na tela. Em jogos e edição, é a peça que mais esquenta.',
-   sig:['Riscos ou quadrados na imagem','FPS caindo com o tempo','Ventoinhas muito altas'],
-   care:'Limpeza do dissipador, troca de pasta e pads térmicos ressecados e checagem dos cabos de energia.',
-   every:6, label:'Limpeza a cada 6 meses', note:'Pasta e pads térmicos a cada 2 anos em uso pesado.'},
-  {id:'mobo', tag:'Base', name:'Placa-mãe',
-   fn:'Liga todas as peças entre si. Um defeito aqui pode parecer defeito em qualquer outra peça.',
-   sig:['Não liga ou reinicia em loop','Relógio do PC sempre errado','Portas USB falhando'],
-   care:'Inspeção de capacitores e trilhas, limpeza de oxidação, troca da bateria do BIOS e atualização quando há correção importante.',
-   every:12, label:'Inspeção anual', note:'Bateria do BIOS dura de 3 a 5 anos.'},
-  {id:'ssd', tag:'Armazenamento', name:'SSD e NVMe',
-   fn:'Onde moram o sistema e os seus arquivos. Rápido, mas costuma avisar pouco antes de falhar.',
-   sig:['Arquivos corrompidos','Inicialização demorando de repente','Trava ao salvar'],
-   care:'Leitura da saúde do disco (S.M.A.R.T.), temperatura do NVMe e rotina de backup. Trocar HD por SSD costuma ser o upgrade que mais se sente num PC antigo.',
-   every:6, label:'Checagem a cada 6 meses', note:'Backup dos arquivos importantes todo mês.'},
-  {id:'hdd', tag:'Armazenamento', name:'HD',
-   fn:'Disco mecânico com prato girando. Bom para guardar muita coisa, sensível a pancada e ao tempo de uso.',
-   sig:['Clique ou estalo repetido','Pastas demorando para abrir','Erros de leitura'],
-   care:'Ouviu clique? Desligue e faça backup já. A gente avalia a saúde do disco, recupera o que dá e indica a troca por SSD.',
-   every:6, label:'Checagem a cada 6 meses', note:'HD com mais de 4 anos merece atenção dobrada.'},
-  {id:'psu', tag:'Energia', name:'Fonte',
-   fn:'Converte a energia da tomada para cada peça. Fonte ruim derruba o PC e pode levar outras peças junto.',
-   sig:['Desliga sem aviso','Cheiro de queimado','Não liga depois de queda de energia'],
-   care:'Teste de tensão, limpeza da ventoinha e avaliação se a potência atende às peças. Fonte não se abre em casa: os capacitores guardam carga.',
-   every:12, label:'Revisão anual', note:'Use estabilizador ou nobreak de qualidade, principalmente em época de chuva.'},
-  {id:'case', tag:'Estrutura', name:'Gabinete e filtros',
-   fn:'A casa de tudo. Os filtros seguram a poeira antes que ela chegue nas peças.',
-   sig:['Poeira visível na grade','Filtro entupido','Cabos no caminho do ar'],
-   care:'Limpeza de filtros e grades, organização de cabos para o ar passar e conferência de aterramento.',
-   every:6, label:'A cada 6 meses', note:'Filtro frontal dá para limpar em casa todo mês com pincel macio.'}
-];
+/* pré-diagnóstico: hot = posição do marcador no desenho, k = peça destacada, every = meses */
+const DEV = {
+  pc: {nome:'computador', list:[
+    {n:'Não liga', i:'i-power', k:'psu', hot:[164,186],
+     term:'> botão apertado... sem resposta\n> testando fonte e placa-mãe',
+     cause:'Fonte com defeito, placa-mãe ou um curto em algum cabo. Às vezes é só um pente de memória mal encaixado.',
+     fix:'Testamos a fonte com multímetro, isolamos as peças uma a uma e só trocamos o que estiver realmente com defeito.',
+     every:12, rev:'Fonte e elétrica: todo ano', note:'Use estabilizador ou nobreak de qualidade, principalmente em época de chuva.'},
+    {n:'Esquenta e desliga', i:'i-heat', k:'cpu', hot:[172,62],
+     term:'> CPU 98 °C\n> desligamento térmico',
+     cause:'Poeira nos dissipadores, pasta térmica seca ou ventoinha parada.',
+     fix:'Limpeza interna completa, troca de pasta térmica e teste de temperatura antes e depois.',
+     every:6, rev:'Limpeza interna a cada 6 meses', note:'A cada 3 meses se tem pet, poeira de rua ou o PC fica no chão.'},
+    {n:'Lento ou travando', i:'i-slow', k:'ssd', hot:[146,102],
+     term:'> boot: 94 s\n> disco em 100% de uso',
+     cause:'HD mecânico no fim da vida, pouca memória ou sistema cheio de programas inúteis.',
+     fix:'Otimização ou formatação com backup e, quando vale a pena, upgrade para SSD e mais memória RAM.',
+     every:6, rev:'Sistema e disco a cada 6 meses', note:'Backup dos arquivos importantes todo mês.'},
+    {n:'Sem imagem', i:'i-art', k:'gpu', hot:[178,129],
+     term:'> liga, mas a tela fica preta\n> testando vídeo e memória',
+     cause:'Placa de vídeo, pente de memória com mau contato ou cabo de vídeo ruim.',
+     fix:'Testamos cabo, memória e placa de vídeo uma a uma. Limpeza dos contatos e troca só do que estiver com defeito.',
+     every:6, rev:'Limpeza da placa de vídeo a cada 6 meses', note:'Pasta e pads térmicos da placa a cada 2 anos em uso pesado.'},
+    {n:'Barulho', i:'i-noise', k:'fan', hot:[241,62],
+     term:'> rpm instável\n> verificando rolamentos e disco',
+     cause:'Rolamento de ventoinha gasto ou, se for um clique, HD falhando.',
+     fix:'Identificamos a origem do barulho. Se for o HD, backup imediato e troca por SSD.',
+     every:6, rev:'Ventoinhas a cada 6 meses', note:'Ouviu clique no HD? Desligue e faça backup já.'},
+    {n:'Tela azul', i:'i-bsod', k:'ram', hot:[209,62],
+     term:'> STOP: MEMORY_MANAGEMENT\n> rodando teste de memória',
+     cause:'Memória RAM com falha, disco com setores ruins ou driver corrompido.',
+     fix:'Teste completo de memória e de disco, revisão de drivers e, se for software, formatação com backup.',
+     every:6, rev:'Memória e disco a cada 6 meses', note:'Teste completo sempre que a tela azul aparecer.'}
+  ]},
+  note: {nome:'notebook', list:[
+    {n:'Não liga', i:'i-power', k:'chg', hot:[57,189],
+     term:'> carregador conectado\n> sem sinal de carga',
+     cause:'Carregador, conector de energia ou placa. Bateria muito gasta também segura o notebook desligado.',
+     fix:'Testamos carregador e conector, medimos a placa e conferimos a bateria antes de trocar qualquer coisa.',
+     every:12, rev:'Bateria e carregador: todo ano', note:'Evite usar o notebook o tempo todo na tomada com a bateria quente.'},
+    {n:'Esquenta', i:'i-heat', k:'vent', hot:[292,170],
+     term:'> CPU 95 °C\n> ventoinha no máximo',
+     cause:'Poeira presa na saída de ar e pasta térmica seca. Usar na cama ou no sofá tampa a entrada de ar.',
+     fix:'Abrimos, limpamos ventoinha e dissipador e trocamos a pasta térmica. Medimos a temperatura antes e depois.',
+     every:12, rev:'Limpeza interna a cada 12 meses', note:'A cada 6 meses se o notebook roda jogo ou fica em superfície macia.'},
+    {n:'Lento', i:'i-slow', k:'ssd', hot:[216,189],
+     term:'> boot: 120 s\n> disco em 100% de uso',
+     cause:'HD mecânico, pouca memória ou sistema pesado.',
+     fix:'Formatação com backup e, se o modelo aceitar, SSD e mais memória RAM. É o upgrade que mais se sente em notebook.',
+     every:6, rev:'Sistema e disco a cada 6 meses', note:'Backup dos arquivos importantes todo mês.'},
+    {n:'Tela com defeito', i:'i-art', k:'screen', hot:[180,78],
+     term:'> tela com listras\n> testando em monitor externo',
+     cause:'Tela trincada, cabo da tela gasto na dobradiça ou placa de vídeo.',
+     fix:'Testamos com monitor externo para achar a causa. Se for a tela, fazemos a troca da tela do notebook.',
+     every:12, rev:'Dobradiça e cabo: todo ano', note:'Abra e feche a tampa pelo centro, não pelo canto.'},
+    {n:'Teclado falhando', i:'i-keys', k:'kbd', hot:[180,166],
+     term:'> teclas sem resposta: A, S, espaço\n> checando o cabo do teclado',
+     cause:'Líquido derramado, sujeira embaixo das teclas ou cabo do teclado solto.',
+     fix:'Limpeza e teste do teclado. Quando não tem volta, troca do teclado do notebook.',
+     every:12, rev:'Revisão junto com a limpeza anual', note:'Derramou líquido? Desligue na hora e não tente secar ligando.'},
+    {n:'Barulho', i:'i-noise', k:'vent', hot:[292,170],
+     term:'> ventoinha raspando\n> rpm instável',
+     cause:'Ventoinha com poeira ou rolamento gasto.',
+     fix:'Limpeza da ventoinha. Se o rolamento está gasto, troca da ventoinha.',
+     every:12, rev:'Ventoinha a cada 12 meses', note:'Barulho que muda com o notebook inclinado é sinal de ventoinha gasta.'}
+  ]},
+  console: {nome:'console', list:[
+    {n:'Esquenta e desliga', i:'i-heat', k:'vent', hot:[121,72],
+     term:'> desligou no meio do jogo\n> temperatura alta',
+     cause:'Poeira acumulada no dissipador e na ventoinha, pasta térmica seca ou console em lugar fechado.',
+     fix:'Abrimos o console, limpamos ventoinha e dissipador e trocamos a pasta térmica. Testamos jogando antes de devolver.',
+     every:12, rev:'Limpeza interna a cada 12 meses', note:'A cada 6 meses se tem pet, poeira de rua ou o console fica em rack fechado.'},
+    {n:'Barulho alto', i:'i-noise', k:'fan', hot:[186,136],
+     term:'> ventoinha a 100%\n> console quente ao toque',
+     cause:'Poeira travando o fluxo de ar e pasta térmica seca. A ventoinha gira no máximo para compensar.',
+     fix:'Limpeza interna e troca da pasta térmica. Se a ventoinha está gasta, troca da ventoinha.',
+     every:12, rev:'Limpeza interna a cada 12 meses', note:'Deixe pelo menos um palmo livre atrás e dos lados do console.'},
+    {n:'Controle puxando', i:'i-game', k:'stick', hot:[280,156],
+     term:'> analógico esquerdo: sem toque\n> personagem andando sozinho',
+     cause:'Drift: desgaste ou sujeira no módulo do analógico. Acontece muito em controle de PlayStation, Xbox e Joy-Con.',
+     fix:'Abrimos o controle e trocamos o módulo do analógico. Testamos a resposta antes de entregar.',
+     every:12, rev:'Controles: revisão anual', note:'Em uso diário pesado, o drift costuma aparecer antes. Não espere piorar.'},
+    {n:'Sem imagem', i:'i-hdmi', k:'hdmi', hot:[233,136],
+     term:'> TV: sem sinal\n> verificando porta HDMI',
+     cause:'Porta HDMI danificada, comum quando o cabo é puxado com o console ligado. Às vezes é só o cabo.',
+     fix:'Testamos cabo e TV primeiro. Se for a porta, troca do HDMI com solda e teste de imagem.',
+     every:12, rev:'Portas e cabos: todo ano', note:'Puxe o cabo pelo conector, nunca pelo fio.'},
+    {n:'Não liga', i:'i-power', k:'psu', hot:[54,150],
+     term:'> botão apertado: sem bipe\n> testando a fonte',
+     cause:'Fonte interna com defeito, muito comum depois de queda de energia ou pico na rede.',
+     fix:'Testamos a fonte e a placa. Se for a fonte, troca da fonte do console.',
+     every:12, rev:'Revisão anual junto com a limpeza', note:'Use estabilizador ou nobreak, principalmente em época de chuva.'},
+    {n:'Não lê disco', i:'i-disc', k:'drive', hot:[94,108],
+     term:'> disco inserido\n> erro de leitura',
+     cause:'Lente do leitor suja ou gasta, ou motor do leitor travando.',
+     fix:'Limpeza e ajuste do leitor de disco. Quando não tem conserto, troca do leitor.',
+     every:12, rev:'Leitor: revisão anual', note:'No Switch o cuidado é com o slot do cartucho.'}
+  ]}
+};
 
-const SYMPTOMS = [
-  {k:'off', icon:'i-power', name:'Não liga', part:7,
-   term:'> POST... sem resposta\n> testando fonte e placa-mãe',
-   cause:'Fonte com defeito, placa-mãe ou um curto em algum cabo. Às vezes é só um pente de memória mal encaixado.',
-   fix:'Testamos a fonte com multímetro, isolamos as peças uma a uma e só trocamos o que estiver realmente com defeito.'},
-  {k:'bsod', icon:'i-bsod', name:'Tela azul e erros', part:2,
-   term:'> STOP: MEMORY_MANAGEMENT\n> rodando teste de memória',
-   cause:'Memória RAM com falha, disco com setores ruins ou driver corrompido.',
-   fix:'Teste completo de memória e de disco, revisão de drivers e, se for software, formatação com backup.'},
-  {k:'slow', icon:'i-slow', name:'Lento ou travando', part:5,
-   term:'> boot: 94 s\n> disco em 100% de uso',
-   cause:'HD mecânico no fim da vida, pouca memória ou sistema cheio de programas inúteis.',
-   fix:'Otimização ou formatação do sistema e, quando vale a pena, upgrade para SSD e mais RAM.'},
-  {k:'heat', icon:'i-heat', name:'Esquenta e desliga', part:1,
-   term:'> CPU 98 °C\n> desligamento térmico',
-   cause:'Poeira nos dissipadores, pasta térmica seca ou ventoinha parada.',
-   fix:'Limpeza interna completa, troca de pasta térmica e teste de temperatura antes e depois.'},
-  {k:'noise', icon:'i-noise', name:'Ruídos e falhas', part:0,
-   term:'> rpm instável\n> verificando rolamentos e disco',
-   cause:'Rolamento de ventoinha gasto ou, se for um clique, HD falhando.',
-   fix:'Identificamos a origem do barulho. Se for o HD, backup imediato e troca por SSD.'},
-  {k:'art', icon:'i-art', name:'Imagem com riscos', part:3,
-   term:'> artefatos detectados\n> GPU 91 °C sob carga',
-   cause:'Placa de vídeo superaquecendo, driver com problema ou cabo de vídeo ruim.',
-   fix:'Limpeza e troca de pasta e pads da placa de vídeo, driver limpo e teste de estresse.'}
-];
-
-/* plano: meses por tipo de uso (1 = contínuo) */
-const PLAN = [
-  {n:'Limpeza interna', s:'poeira, filtros, ventoinhas', casa:6, gamer:4, empresa:4},
-  {n:'Pasta térmica CPU', s:'troca e teste de temperatura', casa:24, gamer:12, empresa:18},
-  {n:'Pasta e pads GPU', s:'placa de vídeo', casa:24, gamer:18, empresa:24},
-  {n:'Saúde de SSD e HD', s:'leitura S.M.A.R.T.', casa:6, gamer:6, empresa:3},
-  {n:'Sistema e drivers', s:'atualização e limpeza', casa:6, gamer:3, empresa:3},
-  {n:'Fonte e elétrica', s:'tensão e aterramento', casa:12, gamer:12, empresa:6},
-  {n:'Backup verificado', s:'você faz, a gente configura', casa:1, gamer:1, empresa:1}
-];
+/* plano: meses entre visitas por tipo de uso (1 = contínuo) */
+const PLAN = {
+  casa: [
+    {n:'Limpeza interna', s:'poeira, filtros, ventoinhas', e:6},
+    {n:'Pasta térmica CPU', s:'troca e teste de temperatura', e:24},
+    {n:'Saúde de SSD e HD', s:'leitura S.M.A.R.T.', e:6},
+    {n:'Sistema e drivers', s:'atualização e limpeza', e:6},
+    {n:'Fonte e elétrica', s:'tensão e aterramento', e:12},
+    {n:'Backup verificado', s:'você faz, a gente configura', e:1}
+  ],
+  gamer: [
+    {n:'Limpeza interna', s:'poeira, filtros, ventoinhas', e:4},
+    {n:'Pasta térmica CPU', s:'troca e teste de temperatura', e:12},
+    {n:'Pasta e pads GPU', s:'placa de vídeo', e:18},
+    {n:'Saúde do SSD', s:'leitura S.M.A.R.T.', e:6},
+    {n:'Sistema e drivers', s:'atualização e limpeza', e:3},
+    {n:'Fonte e elétrica', s:'tensão e potência', e:12}
+  ],
+  console: [
+    {n:'Limpeza interna', s:'ventoinha e dissipador', e:12},
+    {n:'Pasta térmica', s:'console quente ou barulhento', e:24},
+    {n:'Analógicos', s:'drift e botões dos controles', e:12},
+    {n:'HDMI e portas', s:'conectores e cabos', e:12},
+    {n:'Filtros e saídas de ar', s:'você limpa, a gente ensina', e:3},
+    {n:'Fonte e elétrica', s:'estabilizador e tomada', e:12}
+  ]
+};
 
 /* ======================= UTIL ======================= */
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
-const clamp = (v,a,b) => Math.min(b,Math.max(a,v));
-const ss = (a,b,v) => { const t = clamp((v-a)/(b-a),0,1); return t*t*(3-2*t); };
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const pad = n => String(n).padStart(2,'0');
-/* rolagem suave própria: duração proporcional à distância, cancela se o usuário rolar */
-let scrollAnim = 0;
-function smoothTo(y){
-  y = Math.max(0, Math.min(y, document.documentElement.scrollHeight - innerHeight));
-  cancelAnimationFrame(scrollAnim);
-  if (RM){ scrollTo(0, y); return; }
-  const y0 = scrollY, d = y - y0, dur = Math.min(1600, 450 + Math.abs(d)*.18), t0 = performance.now();
-  const e = t => t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
-  const stop = () => { cancelAnimationFrame(scrollAnim); removeEventListener('wheel', stop); removeEventListener('touchstart', stop); };
-  addEventListener('wheel', stop, {passive:true, once:true}); addEventListener('touchstart', stop, {passive:true, once:true});
-  const step = now => { const t = Math.min(1, (now - t0)/dur); scrollTo(0, y0 + d*e(t)); if (t < 1) scrollAnim = requestAnimationFrame(step); else stop(); };
-  scrollAnim = requestAnimationFrame(step);
-}
 
 $$('[data-wa]').forEach(a => a.href = waLink(a.dataset.wa));
 $('#yr').textContent = new Date().getFullYear();
 
-/* ======================= BOOT ======================= */
+/* ======================= BOOT + ENTRADA ======================= */
 (function boot(){
-  const el = $('#bootTxt'), box = $('#boot');
-  if (RM || sessionStorage.getItem('eltec-boot')) { box.classList.add('done'); return; }
+  const el = $('#bootTxt'), box = $('#boot'), root = document.documentElement;
+  const go = () => requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('go')));
+  let seen = false; try { seen = !!sessionStorage.getItem('eltec-boot'); } catch(e){}
+  if (RM || seen) { box.classList.add('done'); go(); return; }
   try { sessionStorage.setItem('eltec-boot','1'); } catch(e){}
-  const L = ['ELTEC BIOS v26.11','Verificando processador ...... <b>OK</b>','Memória 32768 MB ............ <b>OK</b>','Ventoinhas 4/4 .............. <b>OK</b>','Armazenamento NVMe .......... <b>OK</b>','Iniciando bancada'];
-  let i = 0, out = '';
+  const L = ['ELTEC BIOS v26.11','Verificando processador ...... <b>OK</b>','Memória ...................... <b>OK</b>','Ventoinhas ................... <b>OK</b>','Controle sem drift ........... <b>OK</b>','Abrindo a bancada'];
+  let i = 0, out = '', ended = false;
+  const end = () => { if (ended) return; ended = true; box.classList.add('done'); setTimeout(go, 120); };
   const step = () => {
-    if (i < L.length) { out += L[i++] + '\n'; el.innerHTML = out + '<span class="cur"></span>'; setTimeout(step, i === 1 ? 160 : 120); }
-    else setTimeout(() => box.classList.add('done'), 260);
+    if (ended) return;
+    if (i < L.length) { out += L[i++] + '\n'; el.innerHTML = out + '<span class="cur"></span>'; setTimeout(step, i === 1 ? 160 : 110); }
+    else setTimeout(end, 240);
   };
   step();
-  box.addEventListener('click', () => box.classList.add('done'));
+  box.addEventListener('click', end);
 })();
 
 /* ======================= FUNDO DE CIRCUITO ======================= */
@@ -796,12 +919,10 @@ $('#yr').textContent = new Date().getFullYear();
     return t.pts[t.pts.length-1];
   }
   function spawn(){ const t = traces[Math.floor(Math.random()*traces.length)]; if (t) pulses.push({t, d:0, v:90+Math.random()*160, hue: Math.random()<.12}); }
-  let last = performance.now(), acc = 0;
+  let last = performance.now();
   const glow = {};
   ['61,220,151','90,160,255'].forEach(col => { const g = document.createElement('canvas'); g.width = g.height = 20; const gx = g.getContext('2d'); const r = gx.createRadialGradient(10,10,0,10,10,9); r.addColorStop(0,`rgba(${col},.9)`); r.addColorStop(1,`rgba(${col},0)`); gx.fillStyle = r; gx.fillRect(0,0,20,20); glow[col] = g; });
-  let labOn = false; new IntersectionObserver(es => labOn = es[0].isIntersecting).observe(document.getElementById('labStage'));
   function frame(now){
-    if (labOn && innerWidth < 760){ last = now; if (!document.hidden) requestAnimationFrame(frame); return; }
     const dt = Math.min((now-last)/1000, .066); last = now;
     x.setTransform(1,0,0,1,0,0); x.clearRect(0,0,c.width,c.height); if (stat.width && stat.height) x.drawImage(stat,0,0);
     x.setTransform(D,0,0,D,0,0);
@@ -823,597 +944,138 @@ $('#yr').textContent = new Date().getFullYear();
     if (!document.hidden) requestAnimationFrame(frame);
   }
   build();
-  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(build, 200); });
+  // no celular a barra de endereço muda a altura ao rolar: só reconstrói se a largura mudar ou a altura crescer muito
+  let rt, lw = innerWidth, lh = innerHeight;
+  addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => {
+    if (innerWidth !== lw || innerHeight > lh + 120 || innerHeight < lh - 200){ lw = innerWidth; lh = innerHeight; build(); if (RM && stat.width) x.drawImage(stat,0,0); }
+  }, 200); });
   if (RM){ if (stat.width) x.drawImage(stat,0,0); return; }
   requestAnimationFrame(frame);
   document.addEventListener('visibilitychange', () => { if (!document.hidden){ last = performance.now(); requestAnimationFrame(frame); } });
   const spot = document.querySelector('.spot'); let sx = 0, sy = 0, sq = false;
-  addEventListener('pointermove', e => { sx = e.clientX; sy = e.clientY; if (!sq){ sq = true; requestAnimationFrame(() => { spot.style.transform = `translate3d(${sx}px,${sy}px,0)`; sq = false; }); } }, {passive:true});
+  addEventListener('pointermove', e => { if (e.pointerType !== 'mouse') return; sx = e.clientX; sy = e.clientY; if (!sq){ sq = true; requestAnimationFrame(() => { spot.style.transform = `translate3d(${sx}px,${sy}px,0)`; sq = false; }); } }, {passive:true});
 })();
 
-/* ======================= LAB (scroll + painel) ======================= */
-const LAB = window.LAB = { p:0, open:0, idx:-1, hover:-1, gl:false, TOUR0:.40 };
-(function lab(){
-  const sec = $('#lab'), st = $('#labStage');
-  const TOUR0 = .40, N = PARTS.length;
-  const rail = $('#rail'), tags = $('#tags');
-  PARTS.forEach((p,i) => {
-    const b = document.createElement('button'); b.textContent = pad(i+1); b.setAttribute('aria-label', p.name); b.onclick = () => LAB.goTo(i); rail.appendChild(b);
-    const t = document.createElement('button'); t.className = 'tag'; t.innerHTML = `<b>${pad(i+1)}</b><span>${p.name}</span>`; t.onclick = () => LAB.goTo(i);
-    t.onmouseenter = () => LAB.hover = i; t.onmouseleave = () => LAB.hover = -1;
-    tags.appendChild(t);
-  });
-  LAB.tagEls = [...tags.children];
-  const meter = $('#pMeter'); for (let m=1;m<=24;m++) meter.appendChild(document.createElement('i'));
-
-  function total(){ return sec.offsetHeight - innerHeight; }
-  LAB.goTo = i => {
-    const p = TOUR0 + (i + .5)/N*(1-TOUR0);
-    const y = sec.getBoundingClientRect().top + scrollY + p*total();
-    smoothTo(y);
-  };
-  $$('[data-go]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); const y = sec.getBoundingClientRect().top + scrollY + (TOUR0 - .02)*total(); smoothTo(+b.dataset.go === 0 && scrollY > y + 10 ? 0 : y); }));
-  $('#skip').onclick = () => smoothTo($('#sintomas').getBoundingClientRect().top + scrollY);
-  $('#pPrev').onclick = () => LAB.goTo((LAB.idx - 1 + N) % N);
-  $('#pNext').onclick = () => LAB.goTo((LAB.idx + 1) % N);
-
-  let shown = -2;
-  function render(i){
-    if (i === shown || i < 0) return; shown = i;
-    const p = PARTS[i], body = $('#pBody');
-    body.classList.add('swap');
-    setTimeout(() => {
-      $('#pNum').textContent = pad(i+1) + ' / ' + pad(N);
-      $('#pTag').textContent = p.tag;
-      $('#pName').textContent = p.name;
-      $('#pFn').textContent = p.fn;
-      $('#pSig').innerHTML = p.sig.map(s => `<span class="chip">${s}</span>`).join('');
-      $('#pCare').textContent = p.care;
-      $('#pEvery').textContent = p.label;
-      $('#pNote').textContent = p.note;
-      [...meter.children].forEach((c,k) => { c.classList.toggle('on', (k+1) % p.every === 0); c.style.transitionDelay = (k*18)+'ms'; });
-      $('#pWa').href = waLink(`Olá ELTEC! Vi no site a parte de "${p.name}" e quero saber da manutenção.`);
-      body.classList.remove('swap');
-    }, 180);
-    [...rail.children].forEach((b,k) => b.classList.toggle('on', k===i));
-    LAB.tagEls.forEach((t,k) => t.classList.toggle('on', k===i));
-  }
-
-  const hudTxt = $('#hudTxt'), hudBar = $('#hudBar'), nav = $('#nav'), fab = $('#fab');
-  const heroEl = st.querySelector('.hero-copy'), introEl = st.querySelector('.lab-intro');
-  // texto preso ao scroll: sai e entra junto com o movimento do PC, sem salto
-  function update(){
-    const r = sec.getBoundingClientRect();
-    const p = clamp(-r.top / total(), 0, 1);
-    LAB.p = p;
-    LAB.open = ss(.08, .36, p);
-    LAB.idx = p >= TOUR0 - .01 ? clamp(Math.floor((p - TOUR0)/(1-TOUR0)*N), 0, N-1) : -1;
-    const hp = RM ? (p > .03 ? 1 : 0) : ss(.004, .055, p);
-    heroEl.style.opacity = 1 - hp; heroEl.style.setProperty('--hy', (-hp*36) + 'px');
-    const ii = RM ? (p > .06 ? 1 : 0) : ss(.05, .1, p), io = ii * (1 - ss(TOUR0 - .06, TOUR0 - .015, p));
-    introEl.style.opacity = io; introEl.style.setProperty('--iy', ((1 - ii)*18) + 'px');
-    st.classList.toggle('past-hero', p > .02);
-    st.classList.toggle('hero-gone', hp > .995);
-    st.classList.toggle('is-open', LAB.open > .92);
-    st.classList.toggle('touring', LAB.idx >= 0);
-    document.body.classList.toggle('lab-on', LAB.idx >= 0 && r.bottom > innerHeight*.5);
-    hudTxt.textContent = p < .04 ? 'Role para abrir o gabinete' : 'Desmontando ' + Math.round(LAB.open*100) + '%';
-    hudBar.style.transform = `scaleX(${LAB.open})`;
-    render(LAB.idx);
-    nav.classList.toggle('solid', scrollY > 40);
-    fab.classList.toggle('show', -r.top > total()*.3);
-  }
+/* ======================= NAV + BOTÃO FLUTUANTE ======================= */
+(function chrome(){
+  const nav = $('#nav'), fab = $('#fab'), hero = $('#hero'), fin = $('#contato');
+  let heroOut = false, finIn = false;
+  const sync = () => fab.classList.toggle('show', heroOut && !finIn);
+  new IntersectionObserver(es => { heroOut = !es[0].isIntersecting; sync(); }, {threshold:0, rootMargin:'-40% 0px 0px 0px'}).observe(hero);
+  new IntersectionObserver(es => { finIn = es[0].isIntersecting; sync(); }, {threshold:.3}).observe(fin);
   let tick = false;
-  addEventListener('scroll', () => { if (!tick){ tick = true; requestAnimationFrame(() => { update(); tick = false; }); } }, {passive:true});
-  addEventListener('resize', update);
-  update();
+  const upd = () => { nav.classList.toggle('solid', scrollY > 30); tick = false; };
+  addEventListener('scroll', () => { if (!tick){ tick = true; requestAnimationFrame(upd); } }, {passive:true});
+  upd();
 })();
 
-/* ======================= SINTOMAS ======================= */
-(function sym(){
-  const list = $('#symList'); let cur = 0, typer;
-  SYMPTOMS.forEach((s,i) => {
-    const b = document.createElement('button'); b.className = 'sym-btn' + (i===0?' on':'');
-    b.innerHTML = `<svg><use href="#${s.icon}"/></svg><span>${s.name}</span>`;
-    b.onclick = () => show(i); list.appendChild(b);
+/* ======================= SEGMENTADO (pílula) ======================= */
+function segPick(seg, btn){
+  const bs = [...seg.querySelectorAll('button')], i = bs.indexOf(btn);
+  bs.forEach(b => { const on = b === btn; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
+  seg.style.setProperty('--i', i);
+}
+
+/* ======================= PRÉ-DIAGNÓSTICO ======================= */
+(function dx(){
+  const seg = $('#devSeg'), syms = $('#dxSyms'), svg = $('#dev'), hot = $('#hot'), body = $('#dxBody'), meter = $('#dMeter');
+  for (let m=1;m<=24;m++){ const i = document.createElement('i'); i.style.setProperty('--d', (m*15)+'ms'); meter.appendChild(i); }
+  // camada de destaque: cópia de cada peça desenhada por cima
+  svg.querySelectorAll('.g').forEach(g => {
+    const hl = g.querySelector('.hl');
+    g.querySelectorAll('.base [data-k]').forEach(p => hl.appendChild(p.cloneNode(true)));
   });
-  function show(i){
-    cur = i; const s = SYMPTOMS[i];
-    [...list.children].forEach((b,k) => b.classList.toggle('on', k===i));
-    $('#dTitle').textContent = s.name;
-    $('#dCause').textContent = s.cause;
-    $('#dFix').textContent = s.fix;
-    $('#dWa').href = waLink(`Olá ELTEC! Meu computador está com este problema: ${s.name}. Podem me ajudar?`);
-    $('#dSee').textContent = 'Ver ' + PARTS[s.part].name.split(' e ')[0].toLowerCase() + ' no PC';
-    clearInterval(typer); const t = $('#dTerm'); let k = 0;
-    if (RM){ t.textContent = s.term; return; }
-    typer = setInterval(() => { t.textContent = s.term.slice(0, ++k) + (k < s.term.length ? '▌' : ''); if (k >= s.term.length) clearInterval(typer); }, 22);
+  let dev = 'pc', cur = -1, typer, swapT;
+  function setHot(p){ hot.setAttribute('transform', `translate(${p[0]} ${p[1]})`); hot.style.transform = `translate(${p[0]}px,${p[1]}px)`; }
+  function renderSyms(anim){
+    syms.innerHTML = '';
+    DEV[dev].list.forEach((s,i) => {
+      const b = document.createElement('button');
+      b.className = 'sym-btn' + (anim ? ' pop' : '');
+      b.style.setProperty('--d', (i*45)+'ms');
+      b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = `<svg aria-hidden="true"><use href="#${s.i}"/></svg><span>${s.n}</span>`;
+      b.onclick = () => show(i);
+      syms.appendChild(b);
+    });
   }
-  $('#dSee').onclick = () => LAB.goTo(SYMPTOMS[cur].part);
-  show(0);
+  function show(i){
+    const s = DEV[dev].list[i];
+    [...syms.children].forEach((b,k) => { b.classList.toggle('on', k===i); b.setAttribute('aria-pressed', k===i); });
+    const g = svg.querySelector(`.g[data-dev="${dev}"]`);
+    g.querySelectorAll('.hl [data-k]').forEach(p => p.classList.toggle('on', p.dataset.k === s.k));
+    setHot(s.hot);
+    if (i === cur) return; cur = i;
+    clearTimeout(swapT); body.classList.add('swap');
+    swapT = setTimeout(() => {
+      $('#dTitle').textContent = s.n;
+      $('#dCause').textContent = s.cause;
+      $('#dFix').textContent = s.fix;
+      $('#dEvery').textContent = s.rev;
+      $('#dNote').textContent = s.note;
+      [...meter.children].forEach((c,k) => c.classList.toggle('on', (k+1) % s.every === 0));
+      $('#dWa').href = waLink(`Olá ELTEC! Meu ${DEV[dev].nome} está com este problema: ${s.n.toLowerCase()}. Podem me ajudar?`);
+      body.classList.remove('swap');
+      clearInterval(typer); const t = $('#dTerm'); let k = 0;
+      if (RM){ t.textContent = s.term; return; }
+      typer = setInterval(() => { t.textContent = s.term.slice(0, ++k) + (k < s.term.length ? '▌' : ''); if (k >= s.term.length) clearInterval(typer); }, 20);
+    }, cur === -1 ? 0 : 160);
+  }
+  function setDev(d, anim){
+    dev = d; cur = -1;
+    segPick(seg, seg.querySelector(`[data-dev="${d}"]`));
+    svg.querySelectorAll('.g').forEach(g => g.classList.toggle('on', g.dataset.dev === d));
+    renderSyms(anim);
+    show(0);
+  }
+  seg.addEventListener('click', e => { const b = e.target.closest('button'); if (b && b.dataset.dev !== dev) setDev(b.dataset.dev, !RM); });
+  setDev('pc', false);
 })();
 
 /* ======================= PLANO ======================= */
 (function plan(){
-  const g = $('#gridPlan'), seg = $('#seg'), pill = seg.querySelector('.pill');
-  let html = '<div></div>';
-  for (let m=1;m<=24;m++) html += `<div class="gp-h">${m%3===0||m===1?m+'m':''}</div>`;
-  PLAN.forEach((r,ri) => {
-    html += `<div class="gp-name">${r.n}<small>${r.s}</small></div>`;
-    for (let m=1;m<=24;m++) html += `<div class="gp-cell" data-r="${ri}" data-m="${m}"></div>`;
-  });
-  g.innerHTML = html;
-  const cells = [...g.querySelectorAll('.gp-cell')];
-  cells.forEach(c => { const r = PLAN[c.dataset.r]; c.innerHTML = '<span class="run"></span><span class="dot"></span>'; });
-  function set(p, first){
-    [...seg.querySelectorAll('button')].forEach(b => b.classList.toggle('on', b.dataset.p===p));
-    const on = seg.querySelector('button.on'); pill.style.left = on.offsetLeft+'px'; pill.style.width = on.offsetWidth+'px';
-    const visits = new Set();
-    cells.forEach(c => {
-      const r = PLAN[c.dataset.r], m = +c.dataset.m, ev = r[p];
-      const dot = c.querySelector('.dot'), run = c.querySelector('.run');
-      const d = ((+c.dataset.r)*0.05 + m*0.018) + 's';
+  const g = $('#gridPlan'), seg = $('#seg');
+  let p = 'casa', started = false;
+  function build(){
+    let html = '<div></div>';
+    for (let m=1;m<=24;m++) html += `<div class="gp-h">${m%3===0||m===1?m+'m':''}</div>`;
+    PLAN[p].forEach((r,ri) => {
+      html += `<div class="gp-name">${r.n}<small>${r.s}</small></div>`;
+      for (let m=1;m<=24;m++) html += `<div class="gp-cell"><span class="run"></span><span class="dot"></span></div>`;
+    });
+    g.innerHTML = html;
+  }
+  function fill(){
+    const rows = PLAN[p], visits = new Set(), cells = g.querySelectorAll('.gp-cell');
+    cells.forEach((c, idx) => {
+      const ri = Math.floor(idx/24), m = idx%24 + 1, ev = rows[ri].e;
+      const dot = c.lastChild, run = c.firstChild;
+      const d = (ri*0.05 + m*0.018) + 's';
       dot.style.setProperty('--d', d); run.style.setProperty('--d', d);
-      if (ev === 1){ run.classList.toggle('on', true); dot.classList.remove('on'); }
-      else { run.classList.remove('on'); const hit = m % ev === 0; dot.classList.toggle('on', hit); if (hit) visits.add(m); }
+      if (ev === 1) run.classList.add('on');
+      else { const hit = m % ev === 0; dot.classList.toggle('on', hit); if (hit) visits.add(m); }
     });
     $('#planSum').innerHTML = `<b>${visits.size}</b> visitas em 24 meses`;
   }
-  seg.addEventListener('click', e => { const b = e.target.closest('button'); if (b) set(b.dataset.p); });
-  addEventListener('resize', () => set(seg.querySelector('button.on').dataset.p));
-  // começa quando aparece
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ set('casa', true); io.disconnect(); } }), {threshold:.3});
+  function set(np){
+    p = np; segPick(seg, seg.querySelector(`[data-p="${np}"]`));
+    if (!started) return;
+    g.classList.add('swap');
+    setTimeout(() => { build(); g.classList.add('swap'); requestAnimationFrame(() => requestAnimationFrame(() => { g.classList.remove('swap'); fill(); })); }, RM ? 0 : 220);
+  }
+  seg.addEventListener('click', e => { const b = e.target.closest('button'); if (b && b.dataset.p !== p) set(b.dataset.p); });
+  build();
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ started = true; fill(); io.disconnect(); } }), {threshold:0, rootMargin:'0px 0px -25% 0px'});
   io.observe(g);
 })();
 
-/* ======================= REVEAL + CARDS ======================= */
+/* ======================= REVELAÇÃO + CARDS ======================= */
 (function reveal(){
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.15, rootMargin:'0px 0px -5% 0px'});
   $$('.rv, .steps').forEach(el => io.observe(el));
-  $$('.card').forEach(c => c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); c.style.setProperty('--cx', (e.clientX-r.left)+'px'); c.style.setProperty('--cy', (e.clientY-r.top)+'px'); }));
+  if (matchMedia('(hover:hover)').matches)
+    $$('.card').forEach(c => c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); c.style.setProperty('--cx', (e.clientX-r.left)+'px'); c.style.setProperty('--cy', (e.clientY-r.top)+'px'); }));
 })();
-</script>
-
-<script type="importmap">
-{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
-</script>
-<script type="module">
-import * as THREE from 'three';
-import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-
-const LAB = window.LAB;
-const canvas = document.getElementById('gl');
-const stageEl = document.getElementById('labStage');
-const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-let renderer;
-try {
-  renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:'high-performance'});
-} catch(e){ document.documentElement.classList.add('no-gl'); throw e; }
-LAB.gl = true;
-let PR = Math.min(devicePixelRatio, innerWidth < 760 ? 1 : 1.25);
-renderer.setPixelRatio(PR);
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.05;
-
-const scene = new THREE.Scene();
-const pmrem = new THREE.PMREMGenerator(renderer);
-scene.environment = pmrem.fromScene(new RoomEnvironment(), .04).texture;
-
-const camera = new THREE.PerspectiveCamera(30, 1, .1, 100);
-scene.add(new THREE.HemisphereLight(0x9cc0ff, 0x050a17, .7));
-const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(3,5,6); scene.add(key);
-const rim = new THREE.DirectionalLight(0x2f8cff, 2.2); rim.position.set(-5,2,-4); scene.add(rim);
-
-const rig = new THREE.Group(); scene.add(rig);
-const stage = new THREE.Group(); rig.add(stage);
-// sem luz pontual: o brilho azul de dentro vem dos materiais emissivos (mais leve no celular)
-const fill = new THREE.DirectionalLight(0x2f8cff, 1.4); fill.position.set(0,1,4); scene.add(fill);
-
-/* ---------- materiais ---------- */
-const std = o => new THREE.MeshStandardMaterial(o);
-const MAT = {
-  shell: std({color:0x131c31, metalness:.8, roughness:.35}),
-  shellIn: std({color:0x0b1222, metalness:.55, roughness:.6}),
-  black: std({color:0x0a0e18, metalness:.35, roughness:.55}),
-  dark: std({color:0x1a2234, metalness:.7, roughness:.35}),
-  silver: std({color:0xb9c5d8, metalness:1, roughness:.22}),
-  fin: std({color:0x9eabc0, metalness:1, roughness:.3}),
-  copper: std({color:0xc7834f, metalness:1, roughness:.28}),
-  led: std({color:0x2f8cff, emissive:0x2f8cff, emissiveIntensity:2.4}),
-  ledSoft: std({color:0x1d5fd0, emissive:0x2f8cff, emissiveIntensity:1.1}),
-  ice: std({color:0xbfe0ff, emissive:0x9cc8ff, emissiveIntensity:1.4}),
-  blade: std({color:0x111a2c, metalness:.3, roughness:.55}),
-  gold: std({color:0xd4a64a, metalness:1, roughness:.3})
-};
-
-/* textura de placa (PCB) */
-function pcbTex(w=1024, h=1024, base='#0a1833', line='rgba(90,160,255,.55)'){
-  const c = document.createElement('canvas'); c.width = w; c.height = h; const x = c.getContext('2d');
-  x.fillStyle = base; x.fillRect(0,0,w,h);
-  x.strokeStyle = line; x.lineWidth = 2;
-  for (let i=0;i<140;i++){
-    let px = Math.random()*w, py = Math.random()*h; x.beginPath(); x.moveTo(px,py);
-    for (let j=0;j<5;j++){ const horiz = Math.random()<.5; const d = (Math.random()*160+30)*(Math.random()<.5?1:-1); if (horiz) px += d; else py += d; x.lineTo(px,py); }
-    x.stroke();
-    x.fillStyle = 'rgba(140,190,255,.7)'; x.beginPath(); x.arc(px,py,3,0,7); x.fill();
-  }
-  x.fillStyle = 'rgba(200,220,255,.08)'; for (let i=0;i<60;i++) x.fillRect(Math.random()*w, Math.random()*h, 20+Math.random()*40, 10+Math.random()*24);
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t;
-}
-function labelTex(lines, w=512, h=256, bg='#0b1428', fg='#cfe0ff', accent='#2f8cff'){
-  const c = document.createElement('canvas'); c.width = w; c.height = h; const x = c.getContext('2d');
-  x.fillStyle = bg; x.fillRect(0,0,w,h);
-  x.fillStyle = accent; x.fillRect(0,h-10,w,10);
-  x.fillStyle = fg; x.textBaseline = 'middle';
-  lines.forEach((l,i) => { x.font = (i===0? 'italic 700 ' + (h*.32) + 'px "Chakra Petch", sans-serif' : '500 ' + (h*.12) + 'px "JetBrains Mono", monospace'); x.fillText(l, w*.08, h*(i===0?.38:.38 + i*.22)); });
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
-}
-const pcbMat = std({map:pcbTex(), emissiveMap:pcbTex(1024,1024,'#000','rgba(90,160,255,1)'), emissive:0x2f8cff, emissiveIntensity:.35, metalness:.3, roughness:.6});
-
-/* ---------- helpers ---------- */
-function box(w,h,d,mat,r=.012){ return new THREE.Mesh(new RoundedBoxGeometry(w,h,d,2,Math.min(r, w/2.2, h/2.2, d/2.2)), mat); }
-function at(m,x,y,z){ m.position.set(x,y,z); return m; }
-function fan(size, ringMat = MAT.led){
-  const g = new THREE.Group();
-  const s = size, t = .05;
-  const frame = new THREE.Group();
-  frame.add(at(box(s, s*.08, t, MAT.black), 0, s/2 - s*.04, 0));
-  frame.add(at(box(s, s*.08, t, MAT.black), 0, -s/2 + s*.04, 0));
-  frame.add(at(box(s*.08, s, t, MAT.black), s/2 - s*.04, 0, 0));
-  frame.add(at(box(s*.08, s, t, MAT.black), -s/2 + s*.04, 0, 0));
-  g.add(frame);
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(s*.43, s*.018, 8, 48), ringMat); g.add(ring);
-  // rotor inteiro numa malha só: 1 chamada de desenho por ventoinha em vez de 8
-  const rg = [new THREE.CylinderGeometry(s*.14, s*.14, t*.9, 16).rotateX(Math.PI/2)];
-  for (let i=0;i<7;i++) rg.push(new THREE.BoxGeometry(s*.27, s*.13, .008).rotateX(.5).translate(s*.27,0,0).rotateZ(i/7*Math.PI*2));
-  const rotor = new THREE.Mesh(mergeGeometries(rg, false), MAT.blade);
-  g.add(rotor); g.userData.rotor = rotor; ROTORS.push(rotor);
-  return g;
-}
-const ROTORS = [];
-
-/* ---------- peças ---------- */
-const PARTS3D = [];
-// junta as malhas paradas de cada peça por material: menos chamadas de desenho por quadro
-function mergePart(g){
-  stage.updateMatrixWorld(true);
-  const inv = g.matrixWorld.clone().invert(), m = new THREE.Matrix4(), buckets = new Map();
-  g.traverse(o => {
-    if (!o.isMesh || Array.isArray(o.material) || !o.visible) return;
-    for (let p = o; p && p !== g; p = p.parent) if (ROTORS.includes(p)) return;
-    const a = o.geometry.attributes;
-    if (!a.position || !a.normal || !a.uv) return;
-    if (!buckets.has(o.material)) buckets.set(o.material, []);
-    buckets.get(o.material).push(o);
-  });
-  buckets.forEach((list, mat) => {
-    if (list.length < 2) return;
-    const geos = list.map(o => {
-      const geo = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone();
-      Object.keys(geo.attributes).forEach(k => { if (k !== 'position' && k !== 'normal' && k !== 'uv') geo.deleteAttribute(k); });
-      geo.morphAttributes = {}; geo.clearGroups();
-      return geo.applyMatrix4(m.multiplyMatrices(inv, o.matrixWorld));
-    });
-    const merged = mergeGeometries(geos, false);
-    if (!merged) return;
-    list.forEach(o => o.parent.remove(o));
-    g.add(new THREE.Mesh(merged, mat));
-  });
-}
-function makePart(i, build, explode, rot = [0,0,0], delay = 0){
-  const g = new THREE.Group(); build(g);
-  // recentraliza o grupo no centro da própria caixa
-  const b = new THREE.Box3().setFromObject(g), c = b.getCenter(new THREE.Vector3());
-  g.children.forEach(ch => ch.position.sub(c));
-  g.position.copy(c); stage.add(g);
-  mergePart(g);
-  const P = {i, g, home:c.clone(), off:new THREE.Vector3(...explode), rot:new THREE.Euler(...rot), delay, hl:0, mats:[]};
-  g.traverse(o => { if (o.isMesh){ o.material = o.material.clone(); o.material.transparent = true; o.userData.part = i; P.mats.push({m:o.material, base:o.material.emissiveIntensity || 0, em:o.material.emissive ? o.material.emissive.clone() : null, op:o.material.opacity}); } });
-  PARTS3D[i] = P; return P;
-}
-
-// 8 gabinete
-makePart(8, g => {
-  g.add(at(box(2.2, 2.3, .03, MAT.shellIn), 0, 0, -.5));
-  g.add(at(box(2.2, .05, 1.02, MAT.shell, .02), 0, 1.15, 0));
-  g.add(at(box(2.2, .05, 1.02, MAT.shell, .02), 0, -1.15, 0));
-  g.add(at(box(.07, 2.3, 1.02, MAT.shell, .02), 1.1, 0, 0));
-  g.add(at(box(.04, 2.3, 1.0, MAT.shell), -1.1, 0, 0));
-  g.add(at(box(.015, 2.05, .025, MAT.led), 1.14, 0, .4));
-  g.add(at(box(.015, 2.05, .025, MAT.led), 1.14, 0, -.4));
-  [[-.85,.38],[.85,.38],[-.85,-.38],[.85,-.38]].forEach(([x,z]) => g.add(at(box(.28,.06,.12,MAT.black), x, -1.2, z)));
-  g.add(at(box(2.12, .03, .96, MAT.shellIn), 0, -.53, 0));
-  const cover = at(box(1.32, .6, .02, std({map:labelTex(['ELTEC','assistência técnica'], 1024, 256, '#0d162b', '#d8e4fa')})), -.42, -.84, .47);
-  g.add(cover);
-  // grade traseira e slots PCI
-  for (let k=0;k<5;k++) g.add(at(box(.012, .16, .02, MAT.dark), -1.075, -.05 - k*.09, .2));
-}, [0,0,0], [0,0,0], 0);
-
-// 4 placa-mãe
-makePart(4, g => {
-  g.add(at(box(1.5, 1.52, .025, pcbMat, .006), -.3, .36, -.47));
-  g.add(at(box(.1, .42, .07, MAT.dark), -.92, .76, -.43));
-  g.add(at(box(.44, .1, .07, MAT.dark), -.62, 1.02, -.43));
-  g.add(at(box(.26, .26, .025, MAT.dark), .15, -.22, -.445));
-  g.add(at(box(.26, .015, .03, MAT.ledSoft), .15, -.09, -.43));
-  g.add(at(box(.9, .035, .03, MAT.black), -.45, .02, -.445));
-  g.add(at(box(.9, .035, .03, MAT.black), -.45, -.28, -.445));
-  g.add(at(box(.05, .22, .05, MAT.black), .42, .5, -.43));
-  g.add(at(box(.32, .32, .018, MAT.silver), -.45, .66, -.452));
-  [-.1, -.04, .02, .08].forEach(x => g.add(at(box(.028, .66, .02, MAT.black), x, .62, -.45)));
-  const bat = new THREE.Mesh(new THREE.CylinderGeometry(.045,.045,.012,24), MAT.silver); bat.rotation.x = Math.PI/2; g.add(at(bat, 0.0, -.32, -.448));
-}, [0,0,.35], [0,0,0], .25);
-
-// 1 processador + cooler
-makePart(1, g => {
-  g.add(at(box(.2, .2, .02, MAT.silver), -.45, .66, -.433));
-  g.add(at(box(.16, .16, .07, MAT.silver), -.45, .66, -.39));
-  for (let k=0;k<19;k++) g.add(at(box(.3, .008, .4, MAT.fin, .003), -.45, .39 + k*.03, -.12));
-  g.add(at(box(.32, .035, .42, MAT.dark), -.45, .95, -.12));
-  g.add(at(box(.3, .008, .02, MAT.led), -.45, .97, .095));
-  [-.53,-.48,-.42,-.37].forEach(x => { const p = new THREE.Mesh(new THREE.CylinderGeometry(.012,.012,.62,10), MAT.copper); g.add(at(p, x, .67, -.25)); });
-  const f = fan(.5); f.rotation.y = Math.PI/2; g.add(at(f, -.27, .66, -.12));
-}, [.15, 1.2, 1.7], [0,.35,0], .05);
-
-// 2 memória RAM
-makePart(2, g => {
-  [-.1, -.04, .02, .08].forEach(x => {
-    g.add(at(box(.018, .6, .14, MAT.dark, .004), x, .62, -.375));
-    g.add(at(box(.02, .6, .018, MAT.ice, .004), x, .62, -.3));
-  });
-}, [.85, .55, 1.35], [0,-.5,0], .12);
-
-// 3 placa de vídeo
-makePart(3, g => {
-  g.add(at(box(1.15, .14, .42, MAT.dark, .02), -.43, -.07, -.24));
-  g.add(at(box(1.13, .012, .4, MAT.black), -.43, .005, -.24));
-  g.add(at(box(.95, .02, .012, MAT.led), -.43, -.04, -.025));
-  g.add(at(box(.02, .17, .44, MAT.silver), -1.02, -.07, -.24));
-  g.add(at(box(.1, .04, .07, MAT.black), -.15, .025, -.1));
-  [-.8, -.43, -.06].forEach(x => { const f = fan(.34, MAT.ledSoft); f.rotation.x = Math.PI/2; g.add(at(f, x, -.145, -.24)); });
-}, [-.15, -.45, 1.95], [-1.15, .15, 0], .18);
-
-// 5 SSD e NVMe
-makePart(5, g => {
-  g.add(at(box(.42, .3, .035, std({map:labelTex(['SSD','SATA 1TB'], 512, 384, '#141d33')})), .7, .78, -.46));
-  g.add(at(box(.3, .075, .02, pcbMat), -.45, .2, -.445));
-  g.add(at(box(.32, .085, .018, MAT.dark), -.45, .2, -.43));
-  g.add(at(box(.3, .008, .01, MAT.ledSoft), -.45, .24, -.42));
-}, [1.15, .3, 1.25], [0,-.4,0], .22);
-
-// 6 HD
-makePart(6, g => {
-  g.add(at(box(.58, .12, .42, MAT.silver, .015), .58, -.97, .03));
-  g.add(at(box(.5, .008, .3, std({map:labelTex(['HD','3.5" 7200 RPM'], 512, 320, '#c9d2e0', '#0b1428')})), .58, -.905, .03));
-}, [1.25, -.55, 1.5], [.7, -.3, 0], .28);
-
-// 7 fonte
-makePart(7, g => {
-  g.add(at(box(.82, .42, .74, MAT.black, .02), -.62, -.86, .0));
-  g.add(at(box(.6, .3, .01, std({map:labelTex(['ELTEC','PSU 650W'], 512, 256, '#0d1424', '#d8e4fa', '#3ddc97')})), -.62, -.86, .375));
-  const f = fan(.42, MAT.ledSoft); f.rotation.x = Math.PI/2; g.add(at(f, -.62, -1.075, 0));
-}, [-.75, -.6, 1.45], [.35, .35, 0], .3);
-
-// 0 ventoinhas
-makePart(0, g => {
-  [.83, .33, -.17].forEach(y => { const f = fan(.48); f.rotation.y = Math.PI/2; g.add(at(f, .99, y, 0)); });
-  const r = fan(.44); r.rotation.y = Math.PI/2; g.add(at(r, -1.04, .74, -.1));
-}, [.95, .15, .95], [0,-.35,0], 0);
-
-/* cabos (somem ao abrir) */
-const cables = new THREE.Group(); stage.add(cables);
-const cableMat = std({color:0x16243f, metalness:.3, roughness:.5, transparent:true});
-function cable(pts, r=.022){ const c = new THREE.CatmullRomCurve3(pts.map(p => new THREE.Vector3(...p))); cables.add(new THREE.Mesh(new THREE.TubeGeometry(c, 40, r, 8), cableMat)); }
-cable([[.42,.5,-.4],[.55,.45,-.2],[.62,0,-.25],[.5,-.5,-.3]], .035);
-cable([[-.15,.05,-.08],[.05,.3,.02],[.3,.1,.05],[.35,-.5,-.1]]);
-cable([[-.82,1.05,-.42],[-.98,1.08,-.3],[-1.0,.4,-.35],[-.9,-.5,-.3]], .018);
-
-/* vidro lateral */
-const glassMat = std({color:0x9cc4ff, metalness:.2, roughness:.05, transparent:true, opacity:.14, envMapIntensity:1.2, depthWrite:false});
-const glassGeo = new THREE.BoxGeometry(2.16, 2.26, .012);
-const glass = new THREE.Mesh(glassGeo, glassMat); glass.position.set(0,0,.515);
-const glassEdge = new THREE.LineSegments(new THREE.EdgesGeometry(glassGeo), new THREE.LineBasicMaterial({color:0x5aa2ff, transparent:true, opacity:.7}));
-glass.add(glassEdge); stage.add(glass);
-
-/* centro local de cada peça para as etiquetas */
-const tagAnchor = PARTS3D.map((P,i) => {
-  const v = new THREE.Vector3();
-  if (i === 8) v.set(1.1, 1.15, .5).sub(P.home);
-  return v;
-});
-
-const tmp = new THREE.Vector3();
-/* ---------- interação ---------- */
-const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(9,9);
-let ptrIn = false, ptrMoved = false, mx = 0, my = 0, downAt = null;
-canvas.addEventListener('pointermove', e => {
-  const r = canvas.getBoundingClientRect();
-  ptr.set((e.clientX - r.left)/r.width*2-1, -(e.clientY - r.top)/r.height*2+1); ptrIn = true;
-  mx = ptr.x; my = ptr.y; ptrMoved = true;
-});
-canvas.addEventListener('pointerleave', () => { ptrIn = false; LAB.hover = -1; canvas.style.cursor = ''; });
-canvas.addEventListener('pointerdown', e => downAt = [e.clientX, e.clientY]);
-canvas.addEventListener('pointerup', e => {
-  if (!downAt || Math.hypot(e.clientX-downAt[0], e.clientY-downAt[1]) > 8) return;
-  const r = canvas.getBoundingClientRect();
-  ptr.set((e.clientX - r.left)/r.width*2-1, -(e.clientY - r.top)/r.height*2+1);
-  const hit = pick(); if (hit >= 0) LAB.goTo(hit);
-});
-const pickables = []; stage.traverse(o => { if (o.isMesh && o.userData.part !== undefined) pickables.push(o); });
-function pick(){
-  ray.setFromCamera(ptr, camera);
-  const h = ray.intersectObjects(pickables, false);
-  for (const x of h){ const p = x.object.userData.part; if (p === 8 && LAB.open < .9) continue; return p; }
-  return h.length ? h[0].object.userData.part : -1;
-}
-
-/* ---------- layout responsivo ---------- */
-/* O PC é enquadrado num retângulo livre da tela (fora do texto e do painel).
-   Três retângulos: hero, abertura e tour. O scroll mistura um no outro. */
-let W = 0, H = 0, mobile = false;
-const navEl = document.getElementById('nav'), heroEl = stageEl.querySelector('.hero-copy'), introEl = stageEl.querySelector('.lab-intro'), panelEl = document.getElementById('panel');
-const RECT = [{},{},{}];
-function setR(r, l, t, rr, b){ r.l = l; r.t = t; r.r = Math.max(rr, l + 120); r.b = Math.max(b, t + 120); }
-function rects(){
-  const nav = navEl.offsetHeight || 64;
-  if (mobile){
-    setR(RECT[0], 14, nav + 4, W - 14, heroEl.offsetTop - 10);
-    setR(RECT[1], 14, introEl.offsetTop + introEl.offsetHeight + 12, W - 14, H - 64);
-    setR(RECT[2], 6, nav, W - 6, panelEl.offsetTop - 6);
-  } else {
-    const side = Math.max(40, W*.03);
-    setR(RECT[0], heroEl.offsetLeft + heroEl.offsetWidth + 40, nav + 24, W - side, H - 96);
-    setR(RECT[1], introEl.offsetLeft + introEl.offsetWidth + 40, nav + 24, W - side, H - 96);
-    setR(RECT[2], side, nav + 24, panelEl.offsetLeft - 36, H - 84);
-  }
-}
-function resize(){
-  W = canvas.clientWidth; H = canvas.clientHeight;
-  renderer.setSize(W, H, false); camera.aspect = W/H; camera.updateProjectionMatrix();
-  mobile = W < 760;
-  rects();
-}
-addEventListener('resize', resize); resize();
-if (document.fonts) document.fonts.ready.then(rects);
-setTimeout(rects, 1200);
-
-/* cantos da caixa de cada peça, no espaço da própria peça */
-const CORNERS = PARTS3D.map(P => {
-  const b = new THREE.Box3().setFromObject(P.g), out = [];
-  for (let k=0;k<8;k++) out.push(new THREE.Vector3(k&1 ? b.max.x : b.min.x, k&2 ? b.max.y : b.min.y, k&4 ? b.max.z : b.min.z).sub(P.g.position));
-  return out;
-});
-// câmera com direção fixa, levemente de cima
-const CD = new THREE.Vector3(0, .1, 1).normalize(), CU = new THREE.Vector3(0, 1, -.1).normalize(), CR = new THREE.Vector3(1, 0, 0);
-const BX = {a:[0,0,0,0], p:[0,0,0,0]};
-function measure(list, out){
-  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
-  for (const i of list){
-    const P = PARTS3D[i], m = P.g.matrixWorld;
-    for (const c of CORNERS[i]){
-      tmp.copy(c).applyMatrix4(m);
-      const z = tmp.dot(CD), k = distS/Math.max(.5, distS - z);
-      const x = cS.x + (tmp.dot(CR) - cS.x)*k, y = cS.y + (tmp.dot(CU) - cS.y)*k;
-      if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
-    }
-  }
-  out[0] = x0; out[1] = x1; out[2] = y0; out[3] = y1;
-}
-const ALL = PARTS3D.map((P,i) => i);
-
-/* ---------- loop ---------- */
-const ease = t => t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
-const lerp = (a,b,t) => a + (b-a)*t;
-const look = new THREE.Vector3();
-const cS = {x:0, y:0}, rS = {l:0, t:0, r:0, b:0}; let distS = 9, framed = false;
-const projected = new THREE.Vector3();
-let open = 0, t0 = performance.now(), visible = true;
-new IntersectionObserver(es => visible = es[0].isIntersecting).observe(stageEl);
-
-// qualidade adaptativa: baixa a resolução só se o aparelho não segurar ~50 fps
-let fAvg = 16, fLast = 0, fN = 0, dt = 1/60, F = 1;
-const PRmax = PR;
-function setPR(v){ PR = v; renderer.setPixelRatio(PR); renderer.setSize(W, H, false); fN = 0; fAvg = 16; }
-// suavização independente da taxa de quadros (mesma sensação em 60 e 144 Hz)
-const sm = base => 1 - Math.pow(1 - base, F);
-function frame(now){
-  requestAnimationFrame(frame);
-  if (!visible){ fLast = 0; return; }
-  if (fLast){
-    const ms = now - fLast;
-    dt = Math.min(ms, 50)/1000; F = dt*60;
-    if (ms < 100){
-      fAvg = fAvg*.94 + ms*.06; fN++;
-      if (fN > 60 && fAvg > 21 && PR > .75) setPR(Math.max(.75, +(PR - .2).toFixed(2)));
-      else if (fN > 300 && fAvg < 12 && PR < PRmax) setPR(Math.min(PRmax, +(PR + .1).toFixed(2)));
-    }
-  }
-  fLast = now;
-  const t = (now - t0)/1000;
-  open = lerp(open, LAB.open, RM ? 1 : sm(.12));
-  const tour = LAB.idx;
-
-  // explosão escalonada
-  PARTS3D.forEach(P => {
-    const k = ease(Math.min(1, Math.max(0, (open - P.delay*.6)/(1 - P.delay*.6))));
-    P.g.position.copy(P.home).addScaledVector(P.off, k);
-    if (!RM && k > .99) P.g.position.y += Math.sin(t*1.2 + P.i)*.015;
-    P.g.rotation.set(P.rot.x*k, P.rot.y*k, P.rot.z*k);
-    P.g.scale.setScalar(1 + (P.i === 8 ? 0 : P.hl*.08));
-    // destaque
-    const sel = (tour === P.i) || (LAB.hover === P.i);
-    P.hl = lerp(P.hl, sel ? 1 : 0, sm(.15));
-    const dim = (tour >= 0 && open > .85 && tour !== P.i && LAB.hover !== P.i) ? 1 : 0;
-    P.mats.forEach(o => {
-      if (o.em){
-        if (o.base > 0) o.m.emissiveIntensity = o.base * (1 + P.hl*.8);
-        else { o.m.emissive.setHex(0x2f8cff); o.m.emissiveIntensity = P.hl*.45; }
-      }
-      const target = dim ? Math.min(o.op, .38) : o.op;
-      const op = Math.abs(o.m.opacity - target) < .003 ? target : lerp(o.m.opacity, target, sm(.12));
-      o.m.opacity = op; o.m.depthWrite = op > .6;
-    });
-  });
-  glass.position.z = .515 + ease(Math.min(1, open*1.6))*2.6;
-  glass.position.y = ease(Math.min(1, open*1.6))*.4;
-  glassMat.opacity = .14 * (1 - Math.min(1, open*1.8));
-  glassEdge.material.opacity = .7 * (1 - Math.min(1, open*1.6));
-  glass.visible = glassMat.opacity > .005 || glassEdge.material.opacity > .01;
-  cableMat.opacity = 1 - Math.min(1, open*2.5); cables.visible = cableMat.opacity > .01;
-
-  ROTORS.forEach((r,i) => r.rotation.z -= (RM ? 0 : (.12 + (i%3)*.03)) * (1 + open*.5) * F);
-
-  // enquadramento: mede a caixa real das peças e encaixa no retângulo livre
-  stage.rotation.y = lerp(-.62, -.22, open) + (RM ? 0 : Math.sin(t*.35)*.06*(1-open));
-  stage.rotation.x = lerp(.06, .04, open);
-  stage.updateMatrixWorld(true);
-  measure(ALL, BX.a);
-  let bx0 = BX.a[0], bx1 = BX.a[1], by0 = BX.a[2], by1 = BX.a[3];
-  const LP = LAB.p, T0 = LAB.TOUR0;
-  const w1 = ss(.015, .11, LP), w2 = ss(T0 - .06, T0 - .005, LP);
-  // no tour, aproxima da peça escolhida (mais no celular, onde a tela é menor)
-  const focus = tour >= 0 ? w2*(mobile ? .5 : .3) : 0;
-  if (focus > 0){
-    measure([tour], BX.p);
-    const pcx = (BX.p[0] + BX.p[1])/2, pcy = (BX.p[2] + BX.p[3])/2, ph = Math.max(BX.p[1] - BX.p[0], BX.p[3] - BX.p[2], 1.1)*1.25;
-    bx0 = lerp(bx0, pcx - ph, focus); bx1 = lerp(bx1, pcx + ph, focus);
-    by0 = lerp(by0, pcy - ph, focus); by1 = lerp(by1, pcy + ph, focus);
-  }
-  const A = RECT[0], B = RECT[1], C = RECT[2];
-  const rl = lerp(lerp(A.l, B.l, w1), C.l, w2), rr = lerp(lerp(A.r, B.r, w1), C.r, w2);
-  const rt = lerp(lerp(A.t, B.t, w1), C.t, w2), rb = lerp(lerp(A.b, B.b, w1), C.b, w2);
-  const k = framed && !RM ? sm(.1) : 1;
-  rS.l = lerp(rS.l, rl, k); rS.r = lerp(rS.r, rr, k); rS.t = lerp(rS.t, rt, k); rS.b = lerp(rS.b, rb, k);
-  const pad = 1.06, tan2 = 2*Math.tan(camera.fov*Math.PI/360);
-  const dist = Math.max((bx1 - bx0)*pad/(rS.r - rS.l), (by1 - by0)*pad/(rS.b - rS.t)) * H / tan2;
-  cS.x = lerp(cS.x, (bx0 + bx1)/2, k); cS.y = lerp(cS.y, (by0 + by1)/2, k);
-  distS = lerp(distS, dist, k); framed = true;
-  look.set(0,0,0).addScaledVector(CR, cS.x).addScaledVector(CU, cS.y);
-  camera.position.copy(look).addScaledVector(CD, distS); camera.lookAt(look); camera.updateMatrixWorld();
-  // desloca o centro da projeção para o meio do retângulo livre
-  camera.setViewOffset(W, H, W/2 - (rS.l + rS.r)/2, H/2 - (rS.t + rS.b)/2, W, H);
-  // leve paralaxe do mouse, fora da medida para a câmera não correr atrás
-  stage.rotation.y += mx*.1; stage.rotation.x -= my*.05;
-
-  // hover
-  if (ptrIn && open > .85){ if (ptrMoved){ ptrMoved = false; const h = pick(); if (h !== LAB.hover){ LAB.hover = h; canvas.style.cursor = h >= 0 ? 'pointer' : ''; } } }
-  else if (ptrIn && LAB.hover !== -1){ LAB.hover = -1; canvas.style.cursor = ''; }
-
-  // etiquetas
-  if (LAB.tagEls && open > .85){
-    PARTS3D.forEach((P,i) => {
-      projected.copy(tagAnchor[i]); P.g.localToWorld(projected); projected.project(camera);
-      const x = (projected.x*.5+.5)*W, y = (-projected.y*.5+.5)*H;
-      LAB.tagEls[i].style.transform = `translate(${x - 16}px, ${y - 16}px)`;
-    });
-  }
-  renderer.render(scene, camera);
-}
-requestAnimationFrame(frame);
 </script>
 </body>
 </html>
