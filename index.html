@@ -795,12 +795,13 @@ $('#yr').textContent = new Date().getFullYear();
   let last = performance.now(), acc = 0;
   const glow = {};
   ['61,220,151','90,160,255'].forEach(col => { const g = document.createElement('canvas'); g.width = g.height = 20; const gx = g.getContext('2d'); const r = gx.createRadialGradient(10,10,0,10,10,9); r.addColorStop(0,`rgba(${col},.9)`); r.addColorStop(1,`rgba(${col},0)`); gx.fillStyle = r; gx.fillRect(0,0,20,20); glow[col] = g; });
+  let labOn = false; new IntersectionObserver(es => labOn = es[0].isIntersecting).observe(document.getElementById('labStage'));
   function frame(now){
-    if (now - last < 32){ if (!document.hidden) requestAnimationFrame(frame); return; }
+    if (labOn && innerWidth < 760){ last = now; if (!document.hidden) requestAnimationFrame(frame); return; }
     const dt = Math.min((now-last)/1000, .066); last = now;
     x.setTransform(1,0,0,1,0,0); x.clearRect(0,0,c.width,c.height); if (stat.width && stat.height) x.drawImage(stat,0,0);
     x.setTransform(D,0,0,D,0,0);
-    if (pulses.length < Math.max(10, traces.length/5) && Math.random()<.35) spawn();
+    if (pulses.length < Math.max(10, traces.length/5) && Math.random() < .35*dt*60) spawn();
     x.lineCap = 'round';
     for (let i=pulses.length-1;i>=0;i--){
       const p = pulses[i]; p.d += p.v*dt;
@@ -981,7 +982,7 @@ try {
   renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:'high-performance'});
 } catch(e){ document.documentElement.classList.add('no-gl'); throw e; }
 LAB.gl = true;
-let PR = Math.min(devicePixelRatio, innerWidth < 760 ? 1.1 : 1.25);
+let PR = Math.min(devicePixelRatio, innerWidth < 760 ? 1 : 1.25);
 renderer.setPixelRatio(PR);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -1256,25 +1257,27 @@ const projected = new THREE.Vector3();
 let open = 0, t0 = performance.now(), visible = true;
 new IntersectionObserver(es => visible = es[0].isIntersecting).observe(stageEl);
 
-let fAvg = 16, fLast = 0, fN = 0, lastRender = 0, busyUntil = 0, lastP = -1;
+// qualidade adaptativa: baixa a resolução só se o aparelho não segurar ~50 fps
+let fAvg = 16, fLast = 0, fN = 0, dt = 1/60, F = 1;
 const PRmax = PR;
-addEventListener('scroll', () => busyUntil = performance.now() + 900, {passive:true});
-canvas.addEventListener('pointermove', () => busyUntil = performance.now() + 600);
 function setPR(v){ PR = v; renderer.setPixelRatio(PR); renderer.setSize(W, H, false); fN = 0; fAvg = 16; }
+// suavização independente da taxa de quadros (mesma sensação em 60 e 144 Hz)
+const sm = base => 1 - Math.pow(1 - base, F);
 function frame(now){
   requestAnimationFrame(frame);
   if (!visible){ fLast = 0; return; }
-  const moving = now < busyUntil || Math.abs(open - LAB.open) > .002;
-  if (!moving && now - lastRender < 32) return;
-  lastRender = now;
-  if (moving && fLast && now - fLast < 100){
-    fAvg = fAvg*.94 + (now - fLast)*.06; fN++;
-    if (fN > 45 && fAvg > 21 && PR > .75) setPR(Math.max(.75, +(PR - .2).toFixed(2)));
-    else if (fN > 240 && fAvg < 14.5 && PR < PRmax) setPR(Math.min(PRmax, +(PR + .1).toFixed(2)));
+  if (fLast){
+    const ms = now - fLast;
+    dt = Math.min(ms, 50)/1000; F = dt*60;
+    if (ms < 100){
+      fAvg = fAvg*.94 + ms*.06; fN++;
+      if (fN > 60 && fAvg > 21 && PR > .75) setPR(Math.max(.75, +(PR - .2).toFixed(2)));
+      else if (fN > 300 && fAvg < 12 && PR < PRmax) setPR(Math.min(PRmax, +(PR + .1).toFixed(2)));
+    }
   }
-  fLast = moving ? now : 0;
+  fLast = now;
   const t = (now - t0)/1000;
-  open = lerp(open, LAB.open, RM ? 1 : .12);
+  open = lerp(open, LAB.open, RM ? 1 : sm(.12));
   const tour = LAB.idx;
 
   // explosão escalonada
@@ -1286,7 +1289,7 @@ function frame(now){
     P.g.scale.setScalar(1 + (P.i === 8 ? 0 : P.hl*.08));
     // destaque
     const sel = (tour === P.i) || (LAB.hover === P.i);
-    P.hl = lerp(P.hl, sel ? 1 : 0, .15);
+    P.hl = lerp(P.hl, sel ? 1 : 0, sm(.15));
     const dim = (tour >= 0 && open > .85 && tour !== P.i && LAB.hover !== P.i) ? 1 : 0;
     P.mats.forEach(o => {
       if (o.em){
@@ -1294,7 +1297,7 @@ function frame(now){
         else { o.m.emissive.setHex(0x2f8cff); o.m.emissiveIntensity = P.hl*.45; }
       }
       const target = dim ? Math.min(o.op, .38) : o.op;
-      const op = Math.abs(o.m.opacity - target) < .003 ? target : lerp(o.m.opacity, target, .12);
+      const op = Math.abs(o.m.opacity - target) < .003 ? target : lerp(o.m.opacity, target, sm(.12));
       o.m.opacity = op; o.m.transparent = op < .995; o.m.depthWrite = op > .6;
     });
   });
@@ -1306,7 +1309,7 @@ function frame(now){
   cableMat.opacity = 1 - Math.min(1, open*2.5); cables.visible = cableMat.opacity > .01;
   inner.intensity = 6 + Math.sin(t*2)*.8;
 
-  ROTORS.forEach((r,i) => r.rotation.z -= (RM ? 0 : (.12 + (i%3)*.03)) * (1 + open*.5));
+  ROTORS.forEach((r,i) => r.rotation.z -= (RM ? 0 : (.12 + (i%3)*.03)) * (1 + open*.5) * F);
 
   // enquadramento
   const aspect = W/H;
@@ -1316,8 +1319,8 @@ function frame(now){
   let rx, ry, ty;
   if (mobile){ rx = 0; ty = lerp(.75, .1, open) + (tour>=0 ? -1.15 : 0); dist *= lerp(1.0, .82, open); }
   else { rx = lerp(1.45, tour >= 0 ? -1.25 : -.2, open); ty = 0; if (tour >= 0) dist *= .96; }
-  rig.position.x = lerp(rig.position.x, rx, .08);
-  rig.position.y = lerp(rig.position.y, mobile ? -ty*.0 : 0, .08);
+  rig.position.x = lerp(rig.position.x, rx, sm(.08));
+  rig.position.y = lerp(rig.position.y, 0, sm(.08));
   stage.rotation.y = lerp(-.62, -.22, open) + (RM ? 0 : Math.sin(t*.35)*.08*(1-open)) + mx*.12;
   stage.rotation.x = lerp(.06, .04, open) - my*.06;
 
@@ -1325,8 +1328,8 @@ function frame(now){
   look.set(0, 0, 0);
   if (tour >= 0 && open > .5){ PARTS3D[tour].g.getWorldPosition(tmp); look.lerp(tmp, .28); }
   if (mobile) look.y -= ty;
-  lookS.lerp(look, .07);
-  camS.lerp(tmp.set(lookS.x*.4, lookS.y*.5 + .35, dist), .08);
+  lookS.lerp(look, sm(.07));
+  camS.lerp(tmp.set(lookS.x*.4, lookS.y*.5 + .35, dist), sm(.08));
   camera.position.copy(camS); camera.lookAt(lookS);
 
   // hover
@@ -1334,7 +1337,7 @@ function frame(now){
   else if (ptrIn && LAB.hover !== -1){ LAB.hover = -1; canvas.style.cursor = ''; }
 
   // etiquetas
-  if (LAB.tagEls){
+  if (LAB.tagEls && open > .85){
     PARTS3D.forEach((P,i) => {
       projected.copy(tagAnchor[i]); P.g.localToWorld(projected); projected.project(camera);
       const x = (projected.x*.5+.5)*W, y = (-projected.y*.5+.5)*H;
