@@ -75,8 +75,9 @@ main,header,footer{position:relative;z-index:2}
 .lab-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 #gl{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
 .lab-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(40% 50% at var(--gx,68%) 52%,rgba(47,140,255,.16),transparent 70%);transition:--gx 1s}
-.hero-copy{position:absolute;left:clamp(16px,6vw,96px);top:50%;transform:translateY(-50%);max-width:min(560px,46vw);transition:opacity .5s var(--ease),transform .7s var(--ease)}
-.lab.past-hero .hero-copy{opacity:0;transform:translateY(-58%);pointer-events:none}
+.hero-copy{position:absolute;left:clamp(16px,6vw,96px);top:50%;transform:translateY(calc(-50% + var(--hy,0px)));max-width:min(560px,44vw);will-change:opacity,transform}
+.lab.past-hero .hero-copy{pointer-events:none}
+.lab.hero-gone .hero-copy{visibility:hidden}
 .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue2);display:flex;align-items:center;gap:10px}
 .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pulse 2s infinite}
 @keyframes pulse{50%{opacity:.35}}
@@ -146,9 +147,7 @@ h1 em{font-style:normal;color:transparent;background:linear-gradient(90deg,var(-
 .skip{position:absolute;right:clamp(16px,4vw,56px);bottom:30px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:0;pointer-events:none;transition:opacity .4s,color .2s}
 .lab.touring .skip{opacity:1;pointer-events:auto}
 .skip:hover{color:var(--ice)}
-.lab-intro{position:absolute;left:clamp(16px,6vw,96px);top:110px;max-width:440px;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .6s var(--ease);pointer-events:none}
-.lab.opening .lab-intro{opacity:1;transform:none}
-.lab.touring .lab-intro{opacity:0}
+.lab-intro{position:absolute;left:clamp(16px,6vw,96px);top:50%;max-width:min(400px,34vw);opacity:0;transform:translateY(calc(-50% + var(--iy,0px)));pointer-events:none;will-change:opacity,transform}
 .lab-intro h2{font-size:clamp(28px,3vw,42px);text-transform:uppercase}
 .lab-intro p{color:var(--muted);margin-top:10px;font-size:15px}
 .no-gl .lab-fallback{display:flex}
@@ -284,6 +283,7 @@ footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
 
 .fab{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;box-shadow:0 12px 30px -6px rgba(47,140,255,.8);transform:scale(0);transition:transform .45s var(--ease)}
 .fab.show{transform:scale(1)}
+.lab-on .fab{transform:scale(0)}
 .fab svg{width:28px;height:28px}
 .fab::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--blue);opacity:0;animation:ring 2.6s var(--ease) infinite}
 @keyframes ring{0%{transform:scale(.85);opacity:.7}100%{transform:scale(1.35);opacity:0}}
@@ -303,24 +303,28 @@ footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
 }
 @media (max-width:760px){
   #lab{height:620vh}
-  .hero-copy{top:auto;bottom:max(96px,13svh);transform:none;max-width:none;right:16px;left:16px;isolation:isolate}
-  .hero-copy::before{content:"";position:absolute;z-index:-1;left:-16px;right:-16px;top:-40px;bottom:-140px;background:linear-gradient(180deg,rgba(5,10,23,0) 0%,rgba(5,10,23,.82) 22%,rgba(5,10,23,.94) 100%);pointer-events:none}
-  .lab.past-hero .hero-copy{transform:translateY(-12px)}
+  .hero-copy{top:auto;bottom:max(84px,11svh);transform:translateY(var(--hy,0px));max-width:none;right:16px;left:16px}
+  .eyebrow{font-size:11px;letter-spacing:.1em}
   h1{font-size:clamp(38px,11vw,56px);margin:12px 0 14px}
   .lead{font-size:15.5px}
   .hero-ctas{margin-top:20px}
   .hero-ctas .btn{padding:12px 18px;font-size:14.5px}
   .proof{display:none}
   .hud{bottom:18px}
-  .panel{left:12px;right:12px;width:auto;top:auto;bottom:62px;transform:translateY(30px);max-height:47svh;padding:18px 18px 16px}
+  .panel{left:10px;right:10px;width:auto;top:auto;bottom:58px;transform:translateY(30px);height:min(44svh,400px);max-height:none;padding:16px 16px 14px;border-radius:16px}
+  .panel .fn{font-size:14.5px}
+  .p-sec{margin-top:14px}
+  .meter i{height:12px}
   .lab.touring .panel{transform:none}
   .panel h3{margin:8px 0 6px}
-  .rail{left:12px;right:12px;bottom:14px;justify-content:space-between}
+  .rail{left:10px;right:10px;bottom:12px;justify-content:space-between}
   .rail button{width:auto;flex:1}
   .skip{display:none}
   .tag span{display:none}
   .tag{padding:4px}
-  .lab-intro{top:84px;left:16px;right:16px}
+  .lab-intro{top:78px;left:16px;right:16px;max-width:none;transform:translateY(var(--iy,0px))}
+  .lab-intro h2{font-size:26px}
+  .lab-intro p{font-size:14px;margin-top:6px}
   .sym-list{grid-template-columns:1fr 1fr}
   .sym-btn{min-height:96px;padding:14px}
   .sym-btn span{font-size:15px}
@@ -330,7 +334,7 @@ footer .slogan{font-family:var(--f-head);font-style:italic;color:var(--silver)}
   .plan-scroll .grid-plan{min-width:640px}
   .nav .btn span{display:none}
   .nav .btn{padding:10px 12px}
-  .lab-fallback{right:50%;transform:translate(50%,-80%);width:60vw}
+  .lab-fallback{right:50%;top:calc(var(--nav,64px) + 8px);transform:translateX(50%);width:min(52vw,34svh)}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -828,7 +832,7 @@ $('#yr').textContent = new Date().getFullYear();
 })();
 
 /* ======================= LAB (scroll + painel) ======================= */
-const LAB = window.LAB = { p:0, open:0, idx:-1, hover:-1, gl:false };
+const LAB = window.LAB = { p:0, open:0, idx:-1, hover:-1, gl:false, TOUR0:.40 };
 (function lab(){
   const sec = $('#lab'), st = $('#labStage');
   const TOUR0 = .40, N = PARTS.length;
@@ -876,16 +880,23 @@ const LAB = window.LAB = { p:0, open:0, idx:-1, hover:-1, gl:false };
   }
 
   const hudTxt = $('#hudTxt'), hudBar = $('#hudBar'), nav = $('#nav'), fab = $('#fab');
+  const heroEl = st.querySelector('.hero-copy'), introEl = st.querySelector('.lab-intro');
+  // texto preso ao scroll: sai e entra junto com o movimento do PC, sem salto
   function update(){
     const r = sec.getBoundingClientRect();
     const p = clamp(-r.top / total(), 0, 1);
     LAB.p = p;
     LAB.open = ss(.08, .36, p);
     LAB.idx = p >= TOUR0 - .01 ? clamp(Math.floor((p - TOUR0)/(1-TOUR0)*N), 0, N-1) : -1;
-    st.classList.toggle('past-hero', p > .04);
-    st.classList.toggle('opening', p > .06 && LAB.idx < 0);
+    const hp = RM ? (p > .03 ? 1 : 0) : ss(.004, .055, p);
+    heroEl.style.opacity = 1 - hp; heroEl.style.setProperty('--hy', (-hp*36) + 'px');
+    const ii = RM ? (p > .06 ? 1 : 0) : ss(.05, .1, p), io = ii * (1 - ss(TOUR0 - .06, TOUR0 - .015, p));
+    introEl.style.opacity = io; introEl.style.setProperty('--iy', ((1 - ii)*18) + 'px');
+    st.classList.toggle('past-hero', p > .02);
+    st.classList.toggle('hero-gone', hp > .995);
     st.classList.toggle('is-open', LAB.open > .92);
     st.classList.toggle('touring', LAB.idx >= 0);
+    document.body.classList.toggle('lab-on', LAB.idx >= 0 && r.bottom > innerHeight*.5);
     hudTxt.textContent = p < .04 ? 'Role para abrir o gabinete' : 'Desmontando ' + Math.round(LAB.open*100) + '%';
     hudBar.style.transform = `scaleX(${LAB.open})`;
     render(LAB.idx);
@@ -999,7 +1010,8 @@ const rim = new THREE.DirectionalLight(0x2f8cff, 2.2); rim.position.set(-5,2,-4)
 
 const rig = new THREE.Group(); scene.add(rig);
 const stage = new THREE.Group(); rig.add(stage);
-const inner = new THREE.PointLight(0x2f8cff, 6, 4, 2); inner.position.set(-.1,.2,-.1); stage.add(inner);
+// sem luz pontual: o brilho azul de dentro vem dos materiais emissivos (mais leve no celular)
+const fill = new THREE.DirectionalLight(0x2f8cff, 1.4); fill.position.set(0,1,4); scene.add(fill);
 
 /* ---------- materiais ---------- */
 const std = o => new THREE.MeshStandardMaterial(o);
@@ -1014,7 +1026,7 @@ const MAT = {
   led: std({color:0x2f8cff, emissive:0x2f8cff, emissiveIntensity:2.4}),
   ledSoft: std({color:0x1d5fd0, emissive:0x2f8cff, emissiveIntensity:1.1}),
   ice: std({color:0xbfe0ff, emissive:0x9cc8ff, emissiveIntensity:1.4}),
-  blade: std({color:0x0e1626, metalness:.2, roughness:.6, transparent:true, opacity:.92}),
+  blade: std({color:0x111a2c, metalness:.3, roughness:.55}),
   gold: std({color:0xd4a64a, metalness:1, roughness:.3})
 };
 
@@ -1055,12 +1067,10 @@ function fan(size, ringMat = MAT.led){
   frame.add(at(box(s*.08, s, t, MAT.black), -s/2 + s*.04, 0, 0));
   g.add(frame);
   const ring = new THREE.Mesh(new THREE.TorusGeometry(s*.43, s*.018, 8, 48), ringMat); g.add(ring);
-  const rotor = new THREE.Group();
-  const hub = new THREE.Mesh(new THREE.CylinderGeometry(s*.14, s*.14, t*.9, 24), MAT.dark); hub.rotation.x = Math.PI/2; rotor.add(hub);
-  for (let i=0;i<7;i++){
-    const b = new THREE.Mesh(new THREE.BoxGeometry(s*.27, s*.13, .008), MAT.blade);
-    const arm = new THREE.Group(); b.position.x = s*.27; b.rotation.x = .5; arm.add(b); arm.rotation.z = i/7*Math.PI*2; rotor.add(arm);
-  }
+  // rotor inteiro numa malha só: 1 chamada de desenho por ventoinha em vez de 8
+  const rg = [new THREE.CylinderGeometry(s*.14, s*.14, t*.9, 16).rotateX(Math.PI/2)];
+  for (let i=0;i<7;i++) rg.push(new THREE.BoxGeometry(s*.27, s*.13, .008).rotateX(.5).translate(s*.27,0,0).rotateZ(i/7*Math.PI*2));
+  const rotor = new THREE.Mesh(mergeGeometries(rg, false), MAT.blade);
   g.add(rotor); g.userData.rotor = rotor; ROTORS.push(rotor);
   return g;
 }
@@ -1102,7 +1112,7 @@ function makePart(i, build, explode, rot = [0,0,0], delay = 0){
   g.position.copy(c); stage.add(g);
   mergePart(g);
   const P = {i, g, home:c.clone(), off:new THREE.Vector3(...explode), rot:new THREE.Euler(...rot), delay, hl:0, mats:[]};
-  g.traverse(o => { if (o.isMesh){ o.material = o.material.clone(); o.userData.part = i; P.mats.push({m:o.material, base:o.material.emissiveIntensity || 0, em:o.material.emissive ? o.material.emissive.clone() : null, op:o.material.opacity}); } });
+  g.traverse(o => { if (o.isMesh){ o.material = o.material.clone(); o.material.transparent = true; o.userData.part = i; P.mats.push({m:o.material, base:o.material.emissiveIntensity || 0, em:o.material.emissive ? o.material.emissive.clone() : null, op:o.material.opacity}); } });
   PARTS3D[i] = P; return P;
 }
 
@@ -1203,7 +1213,7 @@ cable([[-.15,.05,-.08],[.05,.3,.02],[.3,.1,.05],[.35,-.5,-.1]]);
 cable([[-.82,1.05,-.42],[-.98,1.08,-.3],[-1.0,.4,-.35],[-.9,-.5,-.3]], .018);
 
 /* vidro lateral */
-const glassMat = new THREE.MeshPhysicalMaterial({color:0x9cc4ff, metalness:0, roughness:.05, transparent:true, opacity:.14, envMapIntensity:1.2, depthWrite:false});
+const glassMat = std({color:0x9cc4ff, metalness:.2, roughness:.05, transparent:true, opacity:.14, envMapIntensity:1.2, depthWrite:false});
 const glassGeo = new THREE.BoxGeometry(2.16, 2.26, .012);
 const glass = new THREE.Mesh(glassGeo, glassMat); glass.position.set(0,0,.515);
 const glassEdge = new THREE.LineSegments(new THREE.EdgesGeometry(glassGeo), new THREE.LineBasicMaterial({color:0x5aa2ff, transparent:true, opacity:.7}));
@@ -1216,6 +1226,7 @@ const tagAnchor = PARTS3D.map((P,i) => {
   return v;
 });
 
+const tmp = new THREE.Vector3();
 /* ---------- interação ---------- */
 const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(9,9);
 let ptrIn = false, ptrMoved = false, mx = 0, my = 0, downAt = null;
@@ -1241,18 +1252,64 @@ function pick(){
 }
 
 /* ---------- layout responsivo ---------- */
+/* O PC é enquadrado num retângulo livre da tela (fora do texto e do painel).
+   Três retângulos: hero, abertura e tour. O scroll mistura um no outro. */
 let W = 0, H = 0, mobile = false;
+const navEl = document.getElementById('nav'), heroEl = stageEl.querySelector('.hero-copy'), introEl = stageEl.querySelector('.lab-intro'), panelEl = document.getElementById('panel');
+const RECT = [{},{},{}];
+function setR(r, l, t, rr, b){ r.l = l; r.t = t; r.r = Math.max(rr, l + 120); r.b = Math.max(b, t + 120); }
+function rects(){
+  const nav = navEl.offsetHeight || 64;
+  if (mobile){
+    setR(RECT[0], 14, nav + 4, W - 14, heroEl.offsetTop - 10);
+    setR(RECT[1], 14, introEl.offsetTop + introEl.offsetHeight + 12, W - 14, H - 64);
+    setR(RECT[2], 6, nav, W - 6, panelEl.offsetTop - 6);
+  } else {
+    const side = Math.max(40, W*.03);
+    setR(RECT[0], heroEl.offsetLeft + heroEl.offsetWidth + 40, nav + 24, W - side, H - 96);
+    setR(RECT[1], introEl.offsetLeft + introEl.offsetWidth + 40, nav + 24, W - side, H - 96);
+    setR(RECT[2], side, nav + 24, panelEl.offsetLeft - 36, H - 84);
+  }
+}
 function resize(){
   W = canvas.clientWidth; H = canvas.clientHeight;
   renderer.setSize(W, H, false); camera.aspect = W/H; camera.updateProjectionMatrix();
   mobile = W < 760;
+  rects();
 }
 addEventListener('resize', resize); resize();
+if (document.fonts) document.fonts.ready.then(rects);
+setTimeout(rects, 1200);
+
+/* cantos da caixa de cada peça, no espaço da própria peça */
+const CORNERS = PARTS3D.map(P => {
+  const b = new THREE.Box3().setFromObject(P.g), out = [];
+  for (let k=0;k<8;k++) out.push(new THREE.Vector3(k&1 ? b.max.x : b.min.x, k&2 ? b.max.y : b.min.y, k&4 ? b.max.z : b.min.z).sub(P.g.position));
+  return out;
+});
+// câmera com direção fixa, levemente de cima
+const CD = new THREE.Vector3(0, .1, 1).normalize(), CU = new THREE.Vector3(0, 1, -.1).normalize(), CR = new THREE.Vector3(1, 0, 0);
+const BX = {a:[0,0,0,0], p:[0,0,0,0]};
+function measure(list, out){
+  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+  for (const i of list){
+    const P = PARTS3D[i], m = P.g.matrixWorld;
+    for (const c of CORNERS[i]){
+      tmp.copy(c).applyMatrix4(m);
+      const z = tmp.dot(CD), k = distS/Math.max(.5, distS - z);
+      const x = cS.x + (tmp.dot(CR) - cS.x)*k, y = cS.y + (tmp.dot(CU) - cS.y)*k;
+      if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+    }
+  }
+  out[0] = x0; out[1] = x1; out[2] = y0; out[3] = y1;
+}
+const ALL = PARTS3D.map((P,i) => i);
 
 /* ---------- loop ---------- */
 const ease = t => t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
 const lerp = (a,b,t) => a + (b-a)*t;
-const tmp = new THREE.Vector3(), look = new THREE.Vector3(), lookS = new THREE.Vector3(), camS = new THREE.Vector3(0,.4,9);
+const look = new THREE.Vector3();
+const cS = {x:0, y:0}, rS = {l:0, t:0, r:0, b:0}; let distS = 9, framed = false;
 const projected = new THREE.Vector3();
 let open = 0, t0 = performance.now(), visible = true;
 new IntersectionObserver(es => visible = es[0].isIntersecting).observe(stageEl);
@@ -1298,7 +1355,7 @@ function frame(now){
       }
       const target = dim ? Math.min(o.op, .38) : o.op;
       const op = Math.abs(o.m.opacity - target) < .003 ? target : lerp(o.m.opacity, target, sm(.12));
-      o.m.opacity = op; o.m.transparent = op < .995; o.m.depthWrite = op > .6;
+      o.m.opacity = op; o.m.depthWrite = op > .6;
     });
   });
   glass.position.z = .515 + ease(Math.min(1, open*1.6))*2.6;
@@ -1307,30 +1364,40 @@ function frame(now){
   glassEdge.material.opacity = .7 * (1 - Math.min(1, open*1.6));
   glass.visible = glassMat.opacity > .005 || glassEdge.material.opacity > .01;
   cableMat.opacity = 1 - Math.min(1, open*2.5); cables.visible = cableMat.opacity > .01;
-  inner.intensity = 6 + Math.sin(t*2)*.8;
 
   ROTORS.forEach((r,i) => r.rotation.z -= (RM ? 0 : (.12 + (i%3)*.03)) * (1 + open*.5) * F);
 
-  // enquadramento
-  const aspect = W/H;
-  const needH = lerp(2.9, 5.6, open), needW = lerp(3.2, 6.4, open);
-  const fov = camera.fov*Math.PI/180;
-  let dist = Math.max(needH/(2*Math.tan(fov/2)), needW/(2*Math.tan(fov/2)*aspect));
-  let rx, ry, ty;
-  if (mobile){ rx = 0; ty = lerp(.75, .1, open) + (tour>=0 ? -1.15 : 0); dist *= lerp(1.0, .82, open); }
-  else { rx = lerp(1.45, tour >= 0 ? -1.25 : -.2, open); ty = 0; if (tour >= 0) dist *= .96; }
-  rig.position.x = lerp(rig.position.x, rx, sm(.08));
-  rig.position.y = lerp(rig.position.y, 0, sm(.08));
-  stage.rotation.y = lerp(-.62, -.22, open) + (RM ? 0 : Math.sin(t*.35)*.08*(1-open)) + mx*.12;
-  stage.rotation.x = lerp(.06, .04, open) - my*.06;
-
-  // foco na peça
-  look.set(0, 0, 0);
-  if (tour >= 0 && open > .5){ PARTS3D[tour].g.getWorldPosition(tmp); look.lerp(tmp, .28); }
-  if (mobile) look.y -= ty;
-  lookS.lerp(look, sm(.07));
-  camS.lerp(tmp.set(lookS.x*.4, lookS.y*.5 + .35, dist), sm(.08));
-  camera.position.copy(camS); camera.lookAt(lookS);
+  // enquadramento: mede a caixa real das peças e encaixa no retângulo livre
+  stage.rotation.y = lerp(-.62, -.22, open) + (RM ? 0 : Math.sin(t*.35)*.06*(1-open));
+  stage.rotation.x = lerp(.06, .04, open);
+  stage.updateMatrixWorld(true);
+  measure(ALL, BX.a);
+  let bx0 = BX.a[0], bx1 = BX.a[1], by0 = BX.a[2], by1 = BX.a[3];
+  const LP = LAB.p, T0 = LAB.TOUR0;
+  const w1 = ss(.015, .11, LP), w2 = ss(T0 - .06, T0 - .005, LP);
+  // no tour, aproxima da peça escolhida (mais no celular, onde a tela é menor)
+  const focus = tour >= 0 ? w2*(mobile ? .5 : .3) : 0;
+  if (focus > 0){
+    measure([tour], BX.p);
+    const pcx = (BX.p[0] + BX.p[1])/2, pcy = (BX.p[2] + BX.p[3])/2, ph = Math.max(BX.p[1] - BX.p[0], BX.p[3] - BX.p[2], 1.1)*1.25;
+    bx0 = lerp(bx0, pcx - ph, focus); bx1 = lerp(bx1, pcx + ph, focus);
+    by0 = lerp(by0, pcy - ph, focus); by1 = lerp(by1, pcy + ph, focus);
+  }
+  const A = RECT[0], B = RECT[1], C = RECT[2];
+  const rl = lerp(lerp(A.l, B.l, w1), C.l, w2), rr = lerp(lerp(A.r, B.r, w1), C.r, w2);
+  const rt = lerp(lerp(A.t, B.t, w1), C.t, w2), rb = lerp(lerp(A.b, B.b, w1), C.b, w2);
+  const k = framed && !RM ? sm(.1) : 1;
+  rS.l = lerp(rS.l, rl, k); rS.r = lerp(rS.r, rr, k); rS.t = lerp(rS.t, rt, k); rS.b = lerp(rS.b, rb, k);
+  const pad = 1.06, tan2 = 2*Math.tan(camera.fov*Math.PI/360);
+  const dist = Math.max((bx1 - bx0)*pad/(rS.r - rS.l), (by1 - by0)*pad/(rS.b - rS.t)) * H / tan2;
+  cS.x = lerp(cS.x, (bx0 + bx1)/2, k); cS.y = lerp(cS.y, (by0 + by1)/2, k);
+  distS = lerp(distS, dist, k); framed = true;
+  look.set(0,0,0).addScaledVector(CR, cS.x).addScaledVector(CU, cS.y);
+  camera.position.copy(look).addScaledVector(CD, distS); camera.lookAt(look); camera.updateMatrixWorld();
+  // desloca o centro da projeção para o meio do retângulo livre
+  camera.setViewOffset(W, H, W/2 - (rS.l + rS.r)/2, H/2 - (rS.t + rS.b)/2, W, H);
+  // leve paralaxe do mouse, fora da medida para a câmera não correr atrás
+  stage.rotation.y += mx*.1; stage.rotation.x -= my*.05;
 
   // hover
   if (ptrIn && open > .85){ if (ptrMoved){ ptrMoved = false; const h = pick(); if (h !== LAB.hover){ LAB.hover = h; canvas.style.cursor = h >= 0 ? 'pointer' : ''; } } }
